@@ -1,7 +1,6 @@
 #coding:utf-8
 #=== ==== INITIALISATION ==== ===
 
-    #On créé un plateau
     #Les deux joueurs récupèrent leur Roi avec 3 unité (3 unités au hasard)
     #Une autre unité tirée est démobilisée et envoyée au royaume 
     #J1 : Une carte est envoyée au front
@@ -42,16 +41,41 @@
                     
             # == Attaquer ==
             
-                # JA choisit une cible 
-                # JA choisit sa / ses cartes d'attaque (boucle pour chaque carte) 
-                #    # La carte doit être verticale (position défensive)
+                while(JA a au moins une carte verticale && il souhaite encore attaquer):
+                    positionCible = input("Quelle est la position de la cible à attaquer ?")
+                    #Verification à faire ? Vérifier qu'il y a bien une carte ? Vérfier que la position est bien du type A ou F + 1 2 ou 3 
+                    estPosition(positionCible)
+                    
+                # JA choisi une cible 
+                    while(JA a encore des cartes verticales && il souhaite encore attaquer la cible && la cible est toujours la)
+                        positionCarte = input("Quelle est la position de votre unité qui attaque ?")
+                        while estVide(positionCarte) : 
+                            positionCarte = input("Il semblerait qu'il n'y ait pas de carte ici. Quelle est la position de votre unité qui attaque ?")
+                        
+                        
+                        
+                        carte = obtenirCarte(positionCarte)
+                        
+                        
+                        #Verification à faire
+                            estPosition(PositionCarte) 
+                            estVerticale
+                            
+                            
+                # JA choisi sa / ses cartes d'attaque (boucle pour chaque carte) 
+                #    # La carte doit être verticale (position défensive) 
+                    estVerticale(Carte)
                 #    # Elle passe en position offensive
+                    changementPosition(Carte)
                 #    # Attaque la cible 
                 #
                 #        #  = Resultat de l'attaque =   
-                #        #    # Si L'attaque de la carte = Defense cible et Degat == 0 : 
+                #        #    # Si L'attaque de la carte = Defense cible et Degat == 0 :
+                                if (pointAttaque(Carte) == pointDefense(Cible)) && pointDegat(Cible) == 0 :
                 #        #        # La cible est capturée
-                #        #           # La carte va dans Royaume de JA = devient citoyen (Cartes gardent role dans royaume voir figure)
+                                    capture(Cible)
+         ???    #        #           # La carte va dans Royaume de JA = devient citoyen (Cartes gardent role dans royaume voir figure)
+                                    entrerRoyaume()
                 #        #    # Sinon si Attaque C1 < Defense Cible - Degats déjà subits 
                 #        #        # La cible recoit autant de dégat que de point d'attaque de la carte de JA
                 #        #        # Degat += Attaque carte
@@ -97,7 +121,7 @@
 #    #Soit Fin de la guerre : Aucun joueur n'a de pioche 
     
     
-    
+   
     
     
     
