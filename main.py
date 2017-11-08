@@ -2,8 +2,8 @@
 #=== ==== INITIALISATION ==== ===
 
     #On créé un plateau
-    #Les deux joueurs récupèrent un Roi avec 3 unité (3 unités au hasard)
-    #Une des trois unités est démobilisé et envoyée au royaume 
+    #Les deux joueurs récupèrent leur Roi avec 3 unité (3 unités au hasard)
+    #Une autre unité tirée est démobilisée et envoyée au royaume 
     #J1 : Une carte est envoyée au front
     #J2 : Une carte est envoyée au front 
     #J1 : Une carte est envoyée en reserve
@@ -14,7 +14,7 @@
 #   #=== ==== Déroulement d'un tour ==== ===
         #JA = Joueur actif
         #==== Phase Préparation : ===== 
-        # JA : Redresse ses cartes du champ de bataille en vertical (pret à attaquer)     
+        # JA : Redresse ses cartes du champ de bataille en vertical (prêt à attaquer)     
         # JA : Mobilise une nouvelle unité = Pioche une carte
         # 
         #==== Phase Action ====
