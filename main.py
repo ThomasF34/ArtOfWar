@@ -71,23 +71,64 @@
                 #
                 #        #  = Resultat de l'attaque =   
                 #        #    # Si L'attaque de la carte = Defense cible et Degat == 0 :
-                                if (pointAttaque(Carte) == pointDefense(Cible)) && pointDegat(Cible) == 0 :
+                                if (pointAttaque(Carte) == pointDefense(Cible)) and pointDegat(Cible) == 0 :
                 #        #        # La cible est capturée
                                     capture(Cible)
          ???    #        #           # La carte va dans Royaume de JA = devient citoyen (Cartes gardent role dans royaume voir figure)
                                     entrerRoyaume()
                 #        #    # Sinon si Attaque C1 < Defense Cible - Degats déjà subits 
+                                elif (pointAttaque(Carte) < pointDefense(Cible) - pointDegat(Cible) : 
                 #        #        # La cible recoit autant de dégat que de point d'attaque de la carte de JA
+                                    
                 #        #        # Degat += Attaque carte
+        ???                       mise en place des Getters / Setters ? setPointDegat(Cible,pointDegat(Cible)+pointAttaque(Cible))      
                 #        #        # Elle reste en place et pourra etre rattaquée 
+                                    
                 #        #    # Sinon:
+                                else : 
                 #        #        # La carte va au cimetière (RIP)
-                #        #        # Si la carte tuée est au front et qu'il existe une unité derrière elle, alors celle-ci prend sa place
+                                    meurt(Carte)
+                #        #        # Si une unité se trouve derrière elle, elle prend sa place
+                                    if verifArriere(Carte) :
+                                        deplacerCarte(???) 
+        ??? On différencie deplacerCarte selon la destination ??? 
                 #        #        # Il faut vérifier si le champ de bataille adverse est vide
-                #        #        
                 #        #        # Si le champ est vide:
+                                    if champEstVide(JoueurAdverse) : ??? Fonction du joueur adverse ??? 
+                                        print("Attention il semblerait que le champ de bataille du "+ JoueurAdverse +" soit vide !")
+
                 #        #            #Si il y a deux unités dans la réserve : 
+                                        if (nbCarte(reserve(JoueurAdverse)) >= 2 :
+                                            ??? reserve(Joueur) renvoie la reserve et nb carte renvoi le nb de carte ?? il existe case en python ?? 
+                                            print("Super il y a assez de cartes dans la réserve !")
+                                            
+                                            for i in range(2) :
+                                                positionCarte = input(JoueurAdverse + ", où voulez-vous placer la carte de votre réserve ?")
+                                                while(not(estPosition(positionCarte)) or not(estVide(positionCarte))) : 
+                                                #Arret : Qd la position est bonne & qd la position est vide
+                                                #pousuite : qd la position est fausse ou qd la position est non vide
+                                                    positionCarte = input(JoueurAdverse + "veuillez indiquer une position valide ! Où voulez-vous placer la carte de votre réserve ?")
+                                                Carte = premiereCarteReserve(reserve(JoueurAdverse))
+                                                placerCarte(Carte,positionCarte)
+                                        
                 #        #                #On place sur le champs de bataille
+                                        else : 
+                                            if nbCarte(reserve(JoueurAdverse)) == 1 : 
+                                                if nbCarte(main(JoueurAdverse)) >= 1 : 
+                                            
+                                               ??? ici il semblerait que je doive mettre quelque chose de similaire à ce qu il y a plus haut.
+                                            ??? On peut faire des fonctions hors du main qui ne sont pas dans la spec fonctionnelle ?? 
+                                                
+                                                else : 
+                                                    
+                                                    ? ici le royaume s'effondre'
+                                                
+                                            elif nbCarte(reserve(JoueurAdverse)) == 0 : 
+                                            
+                                                if nbCarte(main(JoueurAdverse)) >= 2 : 
+                                                
+                                                ?? Pareil qu'en haut'
+                                            
                 #        #            #Sinon Si on peut compléter: 
                 #        #                #On utilise une (ou aucune) carte de la reserve et on complète avec les cartes de son royaume
                 #        #                # Impossible de poser la seconde carte sur la premiere
