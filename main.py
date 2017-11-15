@@ -41,7 +41,7 @@ def askAttaqueCible(joueur):
         return askAttaqueCible(joueur) 
 
 def demandeDevelop(JA):
-    print(afficheMain(main(JA)))
+    print(descriptionMain(main(JA)))
     choix = input("Voulez-vous mettre une carte de votre main au royaume ?\n1 = Oui , 0 = Non. Choix : ")
     if choix == 0 :
         return False 
@@ -51,7 +51,21 @@ def demandeDevelop(JA):
         return demandeDevelop(JA)
         
 #================= fin des fonctions diverses ============================
-          
+
+# === Création de la partie === # 
+nom1 = input("Entrez le nom du joueur 1 : ")
+JA = creerJoueur(1,nom1)
+
+nom2 = input("Entrez le nom du joueur 2 : ")
+JoueurAdverse = creerJoueur(2,nom2)
+
+Partie = creerPartie(JA,JoueurAdverse)
+
+
+
+        
+    
+
 #=== ==== INITIALISATION ==== ===
 
 
@@ -72,8 +86,7 @@ while(not(finDePartieEff) and not(finDePartieRoi) and not(finDePartiePioche)) :
 
     #==== Phase Préparation : ===== 
     # JA : Redresse ses cartes du champ de bataille en vertical (prêt à attaquer)
-    nouveauChampBataille = redresseCartes(champBataille(JA))
-    JA = setChampBataille(JA,nouveauChampBataille)
+    redresseCartes(champBataille(JA))
 
     # JA : Mobilise une nouvelle unité = Pioche une carte
     nouvelleMain = ajouterCarteMain(main(JA),piocher(pioche(JA)))
@@ -97,8 +110,10 @@ while(not(finDePartieEff) and not(finDePartieRoi) and not(finDePartiePioche)) :
         if nbCarteMain(main(JA)) >= 1 :
 
             ??????????????????????????
-            print(afficheMain(main(JA)))
+            print(descriptionMain(main(JA)))
             choix = int(input("Quelle carte voulez-vous envoyer en réserve ?"))
+            
+            
             Carte = extraireCarteMain(main(JA),choix) ?? Il faut aussi enlever la carte de la main ?? 
             ??????????????????????????
             ?? Comment savoir quelle carte il veut ?? Reussir à afficher une "liste" de carte ?? Comment faire 
@@ -118,7 +133,7 @@ while(not(finDePartieEff) and not(finDePartieRoi) and not(finDePartiePioche)) :
         if nbCarteReserve(reserve(JA)) >= 1 : 
             Carte = premierCarteReserve(reserve(JA))
         elif nbCarteMain(main(JA)) >= 1 : 
-            print(afficheMain(main(JA)))
+            print(descriptionMain(main(JA)))
             choix = int(input("Quelle carte voulez-vous envoyer en réserve ?"))
             Carte = extraireCarteMain(main(JA),choix)
         else : 
@@ -204,7 +219,7 @@ while(not(finDePartieEff) and not(finDePartieRoi) and not(finDePartiePioche)) :
                         ciblePresente = False #La cible quiite le combat  
                         # Si une unité se trouve derrière elle, elle prend sa place
                         if verifArriere(champBataille(JoueurAdverse),positionCible) :
-                            JA = setChampBataille(JA,avancerCarte(champBataille(JA),positionCible)) 
+                            avancerCarte(champBataille(JA),positionCible) 
                     # Il faut vérifier si le champ de bataille adverse est vide
                     # Si le champ est vide:
                         if champEstVide(JoueurAdverse) : 
@@ -275,7 +290,7 @@ while(not(finDePartieEff) and not(finDePartieRoi) and not(finDePartiePioche)) :
 
     if(nbCarteMain(JA)>=6 or demandeDevelop(JA)):
         ??????????????????????????
-        print(afficheMain(main(JA)))
+        print(descriptionMain(main(JA)))
         choix = int(input(nom(JA) + " Quelle carte voulez-vous envoyer au royaume ?"))
         Carte = extraireCarteMain(main(JA),choix) ?? Il faut aussi enlever la carte de la main ?? 
         ??????????????????????????
