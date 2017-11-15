@@ -45,6 +45,7 @@
                     positionCible = input("Quelle est la position de la cible à attaquer ?")
                     #Verification à faire ? Vérifier qu'il y a bien une carte ? Vérfier que la position est bien du type A ou F + 1 2 ou 3 
                     estPosition(positionCible)
+                    cible = obtenirCarte(positionCible, JoueurAdverse)
                     
                 # JA choisi une cible 
                     while(JA a encore des cartes verticales && il souhaite encore attaquer la cible && la cible est toujours la)
@@ -59,14 +60,14 @@
                         
                         #Verification à faire
                             estPosition(PositionCarte) 
-                            estVerticale
+                            estVerticale()
                             
                             
                 # JA choisi sa / ses cartes d'attaque (boucle pour chaque carte) 
                 #    # La carte doit être verticale (position défensive) 
                     estVerticale(Carte)
                 #    # Elle passe en position offensive
-                    changementPosition(Carte)
+                    changementMode(Carte)
                 #    # Attaque la cible 
                 #
                 #        #  = Resultat de l'attaque =   
@@ -75,22 +76,23 @@
                 #        #        # La cible est capturée
                                     capture(Cible)
          ???    #        #           # La carte va dans Royaume de JA = devient citoyen (Cartes gardent role dans royaume voir figure)
-                                    entrerRoyaume()
+                                    entrerRoyaume(Carte)
                 #        #    # Sinon si Attaque C1 < Defense Cible - Degats déjà subits 
                                 elif (pointAttaque(Carte) < pointDefense(Cible) - pointDegat(Cible) : 
                 #        #        # La cible recoit autant de dégat que de point d'attaque de la carte de JA
                                     
                 #        #        # Degat += Attaque carte
-        ???                       mise en place des Getters / Setters ? setPointDegat(Cible,pointDegat(Cible)+pointAttaque(Cible))      
+        ???                       mise en place des Getters / Setters ? 
+                                    setPointDegat(Cible,pointDegat(Cible)+pointAttaque(Cible))      
                 #        #        # Elle reste en place et pourra etre rattaquée 
                                     
                 #        #    # Sinon:
                                 else : 
                 #        #        # La carte va au cimetière (RIP)
-                                    meurt(Carte)
+                                    entrerCimetiere(Carte)
                 #        #        # Si une unité se trouve derrière elle, elle prend sa place
                                     if verifArriere(Carte) :
-                                        deplacerCarte(???) 
+                                        avancerCarte(??) 
         ??? On différencie deplacerCarte selon la destination ??? 
                 #        #        # Il faut vérifier si le champ de bataille adverse est vide
                 #        #        # Si le champ est vide:
@@ -121,13 +123,16 @@
                                                 
                                                 else : 
                                                     
-                                                    ? ici le royaume s'effondre'
+                                                    ? ici le royaume s effondre
                                                 
                                             elif nbCarte(reserve(JoueurAdverse)) == 0 : 
                                             
                                                 if nbCarte(main(JoueurAdverse)) >= 2 : 
                                                 
                                                 ?? Pareil qu'en haut'
+                                            
+                                                else : 
+                                                     le royaume s effrondre
                                             
                 #        #            #Sinon Si on peut compléter: 
                 #        #                #On utilise une (ou aucune) carte de la reserve et on complète avec les cartes de son royaume
