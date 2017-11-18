@@ -1,22 +1,37 @@
 # === === Partie === === #
     
-def creerPartie(Joueur,Joueur)->Partie
-    # Pre-condition : Il faut deux joueurs différents
+def creerPartie(joueur1,joueur2) : 
+    # Pre-condition : joueur1 et joueur2 sont de type Joueur
     # Post-condition : Aucune
     # Resultat : Retourne une partie dans laquelle : le premier joueur donné en paramètre est le joueurCourant et le deuxieme est son joueur adverse
-
-def setJoueurCourant(Joueur) -> Partie
-    # Pre-condition : Il faut deux joueurs différents
-    # Post-condition : Aucune
-    # Resultat : Retourne un element Joueur qui est le Joueur Adverse du joueur actuel.
     
-def joueurAdverse(Joueur)-> Joueur
-    # Pre-condition : Il faut deux joueurs différents
+    pass
+    
+def joueurCourant(partie) : 
+    # Pre-condition : partie est de type Partie
     # Post-condition : Aucune
-    # Resultat : Retourne un element Joueur qui est le Joueur Adverse du joueur actuel.
+    # Resultat : Retourne le joueurCourant de la Partie
+    
+    pass
 
-def changeJoueurCourant(Joueur,Partie)->Joueur
-    # Pre-condition : Aucune
+def joueurAdverse(partie) : 
+    # Pre-condition : partie est de type Partie
     # Post-condition : Aucune
-    # Resultat : Retourne le joueur adverse théorique du joueur actif. Le joueur adverse du joueur actif devient joueur actif
+    # Resultat : Retourne un element Joueur qui est le Joueur Adverse du joueur courant de la partie donnée en paramètre.
+    
+    pass
+
+def setJoueurCourant(joueur,partie) :
+    # Pre-condition : joueur est de type Joueur, partie est de type Partie
+    # Post-condition : Aucune
+    # Resultat : Modifie la partie pour que le nouveau joueur courant soit celui entré en parametre. La fonction renvoie aussi la partie
+    
+    pass 
+
+def changeJoueurCourant(partie) :
+    # Pre-condition : partie est de type Partie
+    # Post-condition : Aucune
+    # Resultat : Modifie la partie : Le joueur adverse du joueur courant devient joueur courant. Renvoie aussi la Partie. 
+    
+    pass
         

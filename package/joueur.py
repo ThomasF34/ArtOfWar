@@ -4,7 +4,7 @@ def creerJoueur(indice,nom) :
     #Pre-condition : indice est un int = 0 ou 1 
     #                nom est un str 
     #Post-condition :Aucune
-    #resultat : Renvoi crée element de Type Joueur ayant le nom entré en parametre. Il crée aussi un Royaume vide, un champ de bataille vide, une réserve vide, un cimetiere vide. Il crée aussi une pioche. Tous ses elements seront assignés aux joueurs. La fonction renverra le Joueur créé
+    #resultat : Crée un element de Type Joueur ayant le nom entré en parametre. Il crée aussi un Royaume vide, un champ de bataille vide, une réserve vide, un cimetiere vide. Il crée aussi une pioche. Tous ses elements seront assignés aux joueurs. La fonction renverra le Joueur créé
     
     pass
 
