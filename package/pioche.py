@@ -7,10 +7,10 @@ def creerPioche(indice) :
     
     pass
 
-def piocher(pioche)
+def piocher(pioche) : 
     # Pre-condition : pioche est de type Pioche
     # Post-condition : Aucune
-    # Resultat : Renvoie une carte aléatoire dans la pioche donnée en parametre.
+    # Resultat : Renvoie une carte aléatoire dans la pioche donnée en parametre. La pioche est alors modifiée, la carte piochant etant retirée de la pioche.
     
     pass
     
