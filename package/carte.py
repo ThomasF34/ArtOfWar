@@ -1,52 +1,75 @@
 # === === Carte === === #
     
-def estVerticale(Carte)-> Bool
-    # Pre-condition : La carte entrée en paramètre doit être positionnée sur le plateau. 
+def estVerticale(carte) :
+    # Pre-condition : La carte est de type Carte.
     # Post-condition : Aucune
     # Resultat : Retourne True si la carte est verticale, retourne False sinon
+    
+    pass
 
-def changementMode(Carte)->Carte
-    # Pre-condition : La carte entrée en paramètre doit être positionnée sur le plateau. 
+def changementMode(carte) : 
+    # Pre-condition : la carte est de type Carte 
     # Post-condition : Aucune
-    # Resultat : Le mode de la carte a été modifié :  Vertical si Horizontal et inversement
+    # Resultat : Le mode de la carte a été modifié :  Vertical si Horizontal et inversement. La carte est modifiée et renvoyée 
+    
+    pass
+    
 
-def positionCarte(Carte)-> Str 
-    # Pre-condition : La carte entrée en paramètre doit être positionnée sur le plateau. 
+def positionCarte(carte) :
+    # Pre-condition : La carte est type Carte 
     # Post-condition : Aucune
     # Resultat : Retourne la chaine de caractère représentant la position de la carte sur le plateau ("F1","F2",...,"A3")  
     
-def setPositionCarte(Carte,Str) -> Carte
-    # Pre-Cond :
-
-def pointAttaque(Carte)-> Int
-    # Pre-condition : La carte doit avoir une position de plateau
+    pass
+    
+def setPositionCarte(carte,pos) : 
+    # Pre-condition : La carte est type Carte, la pos est une string 
+    # Post-condition : Aucune
+    # Resultat : Modifie la position de la carte. Cette fonction renvoie aussi la carte modifiée
+    
+    pass
+    
+def pointAttaque(carte) : 
+    # Pre-condition : la carte est de type Carte
     # Post-condition : Aucune
     # Resultat : retourne le nombre de point d'attaque de la carte
-
-def pointDefense(Carte)-> Int
-    # Pre-condition : La carte doit avoir une position de plateau
+    
+    pass
+    
+def pointDefense(carte) : 
+    # Pre-condition : la carte est de type Carte
     # Post-condition : Aucune
-    # Resultat : retourne le nombre de point de defense de la carte EN FONCTION DE SON MODE (enjoy)
-
-def pointDegat(Carte)-> Int
-    # Pre-condition : La carte doit avoir une position de plateau
+    # Resultat : retourne le nombre de point de defense de la carte EN FONCTION DE SON MODE 
+        
+    pass
+    
+def pointDegat(carte) : 
+    # Pre-condition : la carte est de type Carte
     # Post-condition : Aucune
     # Resultat : retourne le nombre de point de dégat subits de la carte
-
-def capture(Carte)-> Carte
-    # Pre-condition : La carte doit avoir une position de plateau
+    
+    pass
+    
+def capture(carte,joueur) : 
+    # Pre-condition : la carte est de type Carte. le joueur est de type Joueur
     # Post-condition : Aucune
-    # Resultat : Place la carte dans le Royaume
-
-def setPointDegat(Carte,Int)->Carte
-    # Pre-condition : La carte doit avoir une position de plateau
+    # Resultat : la carte devient capturée. La carte est placée dans le Royaume du joueur entrée en parametre
+    
+    pass
+    
+def setPointDegat(carte,nouvDegat) :
+    # Pre-condition : La carte est de type Carte, nouvDegat est de type Int. 
     # Post-condition : Aucune
-    # Resultat : Renvoi une carte avec des points de degat modifiés
-
-def roleCarte(Carte)->Str
-    # Pre-condition : Aucune
+    # Resultat : Modifie la carte donnée en parametre. pointDegats(carte) de la carte modifiée est egal à nouvDegat. 
+    
+    pass
+    
+def roleCarte(carte):
+    # Pre-condition : carte est de type Carte
     # Post-condition : Renvoi un string parmis ces valeurs : Garde, Archer, Soldat, Roi
     # Resultat : Renvoi le rôle de la carte entrée en paramètre
+        
+    pass
     
 def estAPortee(carte,cible) : 
     # Pre-condition : carte et cible sont toutes deux des Carte présentent sur le champ de bataille

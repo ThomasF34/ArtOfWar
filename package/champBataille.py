@@ -70,7 +70,7 @@ def verifArriere(champ,pos):
     pass
 
 def avancerCarte(champ,pos):
-    # Pre-condition : La position donnée en paramètres est occupée par une carte au front et une autre carte se situe derriere elle
+    # Pre-condition : La position donnée en paramètres est precedemment occupée par une carte au front et une autre carte se situe derriere elle
     # Post-condition : Aucune
     # Resultat : Modifie le champ de bataille dans lequel la carte (située à l'arriere) est envoyée au front. La fonction retourne aussi ce champ. 
     

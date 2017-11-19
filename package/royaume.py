@@ -38,7 +38,7 @@ def nbCarteRoleRoyaume(royaume,role) :
 def estEffondre(royaume) :  
     # Pre-condition : Aucune
     # Post-condition :
-    # Resultat : Indique si le royaume du joueur passé en paramètre est effondré 
+    # Resultat : Renvoie True si le royaume est effondré et False sinon 
     
     pass
 
@@ -56,11 +56,4 @@ def descriptionRoyaume(royaume) :
     
     pass
 
-def extraireRoyaume(royaume,role) : 
-    # Pre-condition : royaume est de type Royaume, role est un String
-    # Post-condition :
-    # Resultat : enleve une carte du royaume de Role = role. Elle renvoie la carte et modifie le royaume
-    
-    pass
-    
     

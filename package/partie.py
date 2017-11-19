@@ -31,7 +31,7 @@ def setJoueurCourant(joueur,partie) :
 def changeJoueurCourant(partie) :
     # Pre-condition : partie est de type Partie
     # Post-condition : Aucune
-    # Resultat : Modifie la partie : Le joueur adverse du joueur courant devient joueur courant. Renvoie aussi la Partie. 
+    # Resultat : En utilisant setJoueurCourant, cette fonction modifie la partie : Le joueur adverse du joueur courant devient joueur courant. Renvoie aussi la Partie. 
     
     pass
         
