@@ -16,9 +16,9 @@ def estPosition(choix) :
         return False
                                             
                                             
-def positionValide(choix) : 
+def positionValide(choix,joueur) : 
     if(choix[0] == "A"):
-        return estPosition(choix) and not(estVideFront(choix[1])) #La position est valide à l'arriere si le front est occupé au meme indice 
+        return estPosition(choix) and not(estVidePosition(champBataille(joueur),"F"+choix[1])) #La position est valide à l'arriere si le front est occupé au meme indice 
     else : 
         return estPosition(choix)
                             
@@ -252,20 +252,20 @@ while(not(finDePartieEff) and not(finDePartieRoi) and not(finDePartiePioche)) :
         
         else : 
             choix = input("Où voulez-vous placer votre carte ?\nPosition : ")
-            while(not(positionValide(choix))):
+            while(not(positionValide(choix,JA))):
                 choix = input("Attention, vous avez entré une mauvaise position !\nOù voulez-vous placer votre carte ?\nPosition : ")
     # 1.c - Une unité (C2) peut être placée sur une carte placée (C1) : 
 
             if(choix[0]=="F"):
             
-                if(not(estVideFront(choix))):
+                if(not(estVidePosition(champBataille(JA),choix))):
                     #C1 va dans la reserve en fin de file 
                     CarteDejaPlacee = extraireFront(front(champBataille(JA)),choix)
                     envoiReserve(reserve(JA),CarteDejaPlacee) 
-                envoyerFront(front(champBataille(JA),Carte,choix))
+                envoyerFront(front(champBataille(JA)),Carte,choix)
                 
             else : #si choix[0] == "A"
-                if(not(estVideArriere(choix))):
+                if(not(estVidePosition(champBataille(JA),choix))):
                     #C1 va dans la reserve en fin de file 
                     CarteDejaPlacee = extraireArriere(arriere(champBataille(JA)),choix)
                     envoiReserve(reserve(JA),CarteDejaPlacee)
@@ -284,7 +284,7 @@ while(not(finDePartieEff) and not(finDePartieRoi) and not(finDePartiePioche)) :
                     print("Attention la coordonnée entrée n'est pas valide")
                     positionCible = input("Quelle est la position de la cible à attaquer ?\nChoix (sous la forme A1,A2,A3,F1,F2,F3) : ")
 
-                Cible = obtenirCarte(champBataille(JoueurAdverse,positionCible))
+                Cible = obtenirCarte(champBataille(JoueurAdverse),positionCible)
                 ciblePresente = True #La cible est dans le combat. Elle en sortira si elle est capturée ou tuée
 
                 # JA choisi sa / ses cartes d'attaque (boucle pour chaque carte) 
@@ -305,7 +305,7 @@ while(not(finDePartieEff) and not(finDePartieRoi) and not(finDePartiePioche)) :
                         # Si L'attaque de la carte = Defense cible et Degat == 0 :
                         if (pointAttaque(Carte) == pointDefense(Cible)) and pointDegat(Cible) == 0 :
                             # La cible est capturée
-                            capture(Cible)
+                            capture(Cible,JA)
                             if roleCarte(Cible) == "Roi" : 
                                 finDePartieRoi = True 
                             ciblePresente = False #La cible quitte le combat 
@@ -315,12 +315,12 @@ while(not(finDePartieEff) and not(finDePartieRoi) and not(finDePartiePioche)) :
                         elif (pointAttaque(Carte) < pointDefense(Cible) - pointDegat(Cible)) : 
                             # La cible recoit autant de dégat que de point d'attaque de la carte de JA
                             # Degat += Attaque carte
-                            Cible = setPointDegat(Cible,pointDegat(Cible)+pointAttaque(Cible))   
-                            ?? on sauvegarde le changement quelque part ?? 
+                            setPointDegat(Cible,pointDegat(Cible)+pointAttaque(Cible))   
+                            
                             # Elle reste en place et pourra etre rattaquée 
                         else : 
                             # La carte va au cimetière (RIP)
-                            JA = setCimetiere(JA, entrerCimetiere(cimetiere(JA), Carte))
+                            entrerCimetiere(cimetiere(JA), Carte)
                             ciblePresente = False #La cible quiite le combat  
                             # Si une unité se trouve derrière elle, elle prend sa place
                             if verifArriere(champBataille(JoueurAdverse),positionCible) :
