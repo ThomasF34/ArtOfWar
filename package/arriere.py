@@ -21,3 +21,16 @@ def nbCarteArriere(arriere) :
         
     pass 
 
+def estVideArriere(arriere, pos) :
+    # Pre-condition : pos est un str
+    # Post-condition : Aucune 
+    # Resultat : Renvoi True si la position est vide, renvoi False sinon
+    
+    pass 
+
+def extraireArriere(arriere,pos) : 
+    # Pre-condition : arriere est de type Arriere, pos est un str 
+    # Post-condition : Aucune 
+    # Resultat : renvoie la carte située à la position pos, et modifie l'arriere en retirant la carte. 
+        
+    pass 

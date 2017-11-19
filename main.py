@@ -226,6 +226,7 @@ while(not(finDePartieEff) and not(finDePartieRoi) and not(finDePartiePioche)) :
         else : #Si j'ai pas d'unité dans ma main je peux rien faire 
             print("Comment voulez-vous ajouter une carte à votre réserve si vous n'avez pas de carte dans votre main ?")
 
+
     elif action == 2 : #déploie une unité 
     # == Déployer une unité ==
 
@@ -264,6 +265,10 @@ while(not(finDePartieEff) and not(finDePartieRoi) and not(finDePartiePioche)) :
                 envoyerFront(front(champBataille(JA),Carte,choix))
                 
             else : #si choix[0] == "A"
+                if(not(estVideArriere(choix))):
+                    #C1 va dans la reserve en fin de file 
+                    CarteDejaPlacee = extraireArriere(arriere(champBataille(JA)),choix)
+                    envoiReserve(reserve(JA),CarteDejaPlacee)
                 envoyerArriere(arriere(champBataille(JA)),Carte,choix)
 
     else : #action == 3  #Attaque 

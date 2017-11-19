@@ -1,4 +1,5 @@
 # === === Front === === #
+# === === Front === === #
     
 def creerFront() -> Front
     # Pre-condition : Aucune
@@ -15,7 +16,7 @@ def nbCarteFront(Front)->Int
     # Post-condition : Aucune 
     # Resultat : Indique le nombre de carte présente sur le front
 
-def estVideFront(Str)->Bool
+def estVideFront(Front, Str)->Bool
     # Pre-condition : La carte doit être situé à l'arrière
     # Post-condition : Aucune 
     # Resultat : Renvoi True si la position est vide, renvoi False sinon
