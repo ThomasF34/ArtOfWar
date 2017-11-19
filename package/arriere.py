@@ -1,18 +1,23 @@
 # === === Arriere === === #
 
-def creerArriere() -> Arriere
+def creerArriere() :
     # Pre-condition : Aucune
     # Post-condition : Aucune
-    # Resultat : Créer un element de Type Front
+    # Resultat : Créer un element de Type Arriere
+    
+    pass
 
-def envoyerArriere(Arriere,Carte,Str)->Arriere
-    # Pre-condition : La carte doit être situé à l'arrière
+def envoyerArriere(arriere,carte,pos) :
+    # Pre-condition : arriere est de type Arriere, carte est de type Carte. pos est un string dont le premier caractère est un A et le deuxieme est un chiffre
     # Post-condition : Aucune 
-    # Resultat : La carte située à l'arrière est envoyée à l'arriere
+    # Resultat : La carte donnée en parametre est positionné dans l'arriere, à la position pos. La fonction modifie donc l'arriere et le renvoie
+    
+    pass
 
-def nbCarteArriere(Front)->Int
-    # Pre-condition : La carte doit être situé à l'arrière
+def nbCarteArriere(arriere) : 
+    # Pre-condition : arriere est de type Arriere
     # Post-condition : Aucune 
-    # Resultat : Indique le nombre de carte présente sur l'arriere
+    # Resultat : Indique le nombre de carte présente sur l'arriere 
         
-        
+    pass 
+

@@ -5,7 +5,7 @@ def creerFront() -> Front
     # Post-condition : Aucune 
     # Resultat : Créer un element de Type Front
 
-def envoyerFront(Carte,Front,Str)->Front #======= ======== On a enlevé larriere attention si on doit le remettre
+def envoyerFront(Front,Carte,Str)->Front #======= ======== On a enlevé larriere attention si on doit le remettre
     # Pre-condition : La carte doit être situé à l'arrière
     # Post-condition : Aucune 
     # Resultat : La carte est envoyé au front à la position indiquée en paramètre

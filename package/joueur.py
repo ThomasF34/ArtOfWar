@@ -4,7 +4,7 @@ def creerJoueur(indice,nom) :
     #Pre-condition : indice est un int = 0 ou 1 
     #                nom est un str 
     #Post-condition :Aucune
-    #resultat : Crée un element de Type Joueur ayant le nom entré en parametre. Il crée aussi un Royaume vide, un champ de bataille vide, une réserve vide, un cimetiere vide. Il crée aussi une pioche. Tous ses elements seront assignés aux joueurs. La fonction renverra le Joueur créé
+    #resultat : Crée un element de Type Joueur ayant le nom entré en parametre. Il crée aussi un Royaume vide, un champ de bataille vide, une réserve vide, un cimetiere vide, une main vide. Il crée aussi une pioche. Tous ses elements seront assignés aux joueurs. La fonction renverra le Joueur créé
     
     pass
 
@@ -26,6 +26,7 @@ def main(joueur) :
     # Pre-condition : Le joueur doit être de la partie, il est de type Joueur
     # Post-condition : Aucune
     # Resultat : retourne la main du joueur entré en paramètre
+    
     pass
 
 def royaume(joueur) :

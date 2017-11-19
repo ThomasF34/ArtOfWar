@@ -49,10 +49,107 @@ def demandeDevelop(JA):
         return True
     else:
         return demandeDevelop(JA)
+    
+def demandeAttaquerCible(JA) :
+    choix = input("Voulez-vous encore attaquer la meme cible ?\n1 = Oui , 0 = Non. Choix : ")
+    if choix == 0 :
+        return False 
+    elif choix == 1 : 
+        return True
+    else: 
+        return demandeAttaquerCible(JA)
+    
+def demandeAttaquer(JA) :
+    choix = input("Voulez-vous encore attaquer ?\n1 = Oui , 0 = Non. Choix : ")
+    if choix == 0 :
+        return False 
+    elif choix == 1 : 
+        return True
+    else: 
+        return demandeAttaquer(JA)
+    
+def deploiementCarte(joueur,nbCarteAPlacerReserve,nbCarteAPlacerRoyaume) : 
+    #Permet de placer nbCarteAPlacerReserve cartes provenant de la reserve sur le champ de bataille et nbCarteAPlacerRoyaume cartes provenant du royaume sur le champ de bataille. 
+    for i in range(nbCarteAPlacerReserve) :
+        #A deux reprises on demande au joueur de placer une carte sur le champ 
+        positionCarteSecours = input(nom(joueur) + ", où voulez-vous placer la carte de votre réserve ?")
+        while(not(estPosition(positionCarteSecours)) or not(estVidePosition(champBataille(joueur),positionCarteSecours))) : 
+        #Arret : Qd la position est bonne & qd la position est vide
+        #pousuite : qd la position est fausse ou qd la position est non vide
+            positionCarteSecours = input(nom(joueur) + "veuillez indiquer une position valide ! Où voulez-vous placer la carte de votre réserve ?")
+        #On place sur le champs de bataille
+        if(positionCarteSecours[0] == "F"):
+            Carte = premiereCarteReserve(reserve(joueur))
+            envoyerFront(front(champBataille(joueur)),Carte,positionCarteSecours) 
+        else: #si choix[0] == "A"
+            while(not(estPosition(positionCarteSecours)) or not(estVidePosition(champBataille(joueur),positionCarteSecours)) or not(estVidePosition(champBataille(joueur),"A"+positionCarteSecours[1]))) : 
+                #Arret : Qd la position est bonne & qd la position est vide & qd il y a quelqu'un devant 
+                #pousuite : qd la position est fausse ou qd la position est non vide ou qd il y a personne devant 
+                positionCarteSecours = input(nom(joueur) + "veuillez indiquer une position valide ! Où voulez-vous placer la carte de votre réserve ?")
+            Carte = premiereCarteReserve(reserve(joueur))
+            envoyerArriere(arriere(champBataille(joueur)),Carte,positionCarteSecours)
+            
+    for i in range(nbCarteAPlacerRoyaume) : 
+        #A deux reprises on demande au joueur de placer une carte sur le champ 
+        print(descriptionRoyaume(royaume(joueur)))
+        roleChoisi = input(nom(joueur) + " quel est le role de la carte que vous voulez extraire du royaume ?")
+        while(roleChoisi != "Roi" and roleChoisi != "Soldat" and roleChoisi != "Archer" and roleChoisi != "Garde") : 
+            #Arret quand role = "Roi" ou .... ou ... ou ... 
+            #Poursuite tant que role != "Roi" et 
+            roleChoisi = input(nom(joueur) + " quel est le role de la carte que vous voulez extraire du royaume ?")
+
+        positionCarteSecours = input(nom(joueur) + ", où voulez-vous placer la carte de votre royaume ?")
+        while(not(estPosition(positionCarteSecours)) or not(estVidePosition(champBataille(joueur),positionCarteSecours))) : 
+        #Arret : Qd la position est bonne & qd la position est vide
+        #pousuite : qd la position est fausse ou qd la position est non vide
+            positionCarteSecours = input(nom(joueur) + "veuillez indiquer une position valide ! Où voulez-vous placer la carte de votre royaume ?")
+        #On place sur le champs de bataille
+        if(positionCarteSecours[0] == "F"):
+            Carte = extraireRoyaume(royaume(joueur),roleChoisi)
+            envoyerFront(front(champBataille(joueur)),Carte,positionCarteSecours) 
+        else: #si choix[0] == "A"
+            while(not(estPosition(positionCarteSecours)) or not(estVidePosition(champBataille(joueur),positionCarteSecours)) or not(estVidePosition(champBataille(joueur),"A"+positionCarteSecours[1]))) : 
+                #Arret : Qd la position est bonne & qd la position est vide & qd il y a quelqu'un devant 
+                #pousuite : qd la position est fausse ou qd la position est non vide ou qd il y a personne devant 
+                positionCarteSecours = input(nom(joueur) + "veuillez indiquer une position valide ! Où voulez-vous placer la carte de votre réserve ?")
+            Carte = extraireRoyaume(royaume(joueur),roleChoisi)
+            envoyerArriere(arriere(champBataille(joueur)),Carte,positionCarteSecours)
+        
+def premierAjoutFront(joueur):
+    print(descriptionMain(main(joueur)))
+    choix = int(input(nom(joueur) + " quelle carte voulez vous mettre au front ?"))
+    while(choix<1 or choix>4):
+        #Arret quand choix est >= 1 et <= 4 
+        #Poursuite quand choix est < 1 ou > 4 
+        choix = int(input(nom(joueur) + " quelle carte voulez vous mettre au front ?"))
+        
+    pos = input(nom(joueur) + " votre carte va être envoyé au Front. Où voulez-vous mettre votre carte ? (F puis 1|2|3)")
+    while(not(estPosition(pos)) or pos[0]!='F') : 
+        #Arret quand pos est position et que pos[0] == 'F'
+        #Poursuite tant que pos n'est pas positon ou que pos[0] != 'F'
+        pos = input(nom(joueur) + " votre carte va être envoyé au Front. Où voulez-vous mettre votre carte ? (F puis 1|2|3)")   
+        
+    envoyerFront(front(champBataille(joueur)),extraireCarteMain(main(joueur),choix),pos)
+    
+def premierAjoutReserve(joueur): 
+    
+    print(descriptionMain(main(joueur)))
+    choix = int(input(nom(joueur) + " quelle carte voulez vous mettre en reserve ?"))
+    while(choix<1 or choix>3):
+        #Arret quand choix est >= 1 et <= 3 
+        #Poursuite quand choix est < 1 ou > 3 
+        choix = int(input(nom(joueur) + " quelle carte voulez vous mettre en reserve ?"))
+        
+    envoiReserve(reserve(joueur),extraireCarteMain(main(joueur),choix))
         
 #================= fin des fonctions diverses ============================
 
 # === Création de la partie === # 
+
+#Début de la partie
+
+
+
 nom1 = input("Entrez le nom du joueur 1 : ")
 JA = creerJoueur(1,nom1)
 
@@ -61,20 +158,31 @@ JoueurAdverse = creerJoueur(2,nom2)
 
 Partie = creerPartie(JA,JoueurAdverse)
 
-
-
-        
-    
-
 #=== ==== INITIALISATION ==== ===
 
 
     #Les deux joueurs récupèrent leur Roi avec 3 unité (3 unités au hasard)
-    #Une autre unité tirée est démobilisée et envoyée au royaume 
+    ajouterCarteMain(main(JA),piocher(pioche(JA)))
+    ajouterCarteMain(main(JA),piocher(pioche(JA)))
+    ajouterCarteMain(main(JA),piocher(pioche(JA)))
+    
+    ajouterCarteMain(main(JoueurAdverse),piocher(pioche(JoueurAdverse)))
+    ajouterCarteMain(main(JoueurAdverse),piocher(pioche(JoueurAdverse)))
+    ajouterCarteMain(main(JoueurAdverse),piocher(pioche(JoueurAdverse)))
+    
+    #Une autre unité tirée est démobilisée et envoyée au royaume
+    
+    entrerRoyaume(royaume(JA),piocher(pioche(JA)))
+    entrerRoyaume(royaume(JoueurAdverse),piocher(pioche(JoueurAdverse)))    
+    
     #J1 : Une carte est envoyée au front
+    premierAjoutFront(JA)
     #J2 : Une carte est envoyée au front 
+    premierAjoutFront(JoueurAdverse)
     #J1 : Une carte est envoyée en reserve
+    premierAjoutReserve(JA)
     #J2 : Une carte est envoyée en reserve
+    premierAjoutReserve(JoueurAdverse)
     
 #=== ==== La partie commence ==== === 
           
@@ -82,15 +190,14 @@ while(not(finDePartieEff) and not(finDePartieRoi) and not(finDePartiePioche)) :
     #=== ==== Déroulement d'un tour ==== ===
     #JA = Joueur actif
     JA = joueurCourant(Partie)
-    JoueurAdverse = joueurAdverse(Partie, JA)
+    JoueurAdverse = joueurAdverse(Partie)
 
     #==== Phase Préparation : ===== 
     # JA : Redresse ses cartes du champ de bataille en vertical (prêt à attaquer)
     redresseCartes(champBataille(JA))
 
     # JA : Mobilise une nouvelle unité = Pioche une carte
-    nouvelleMain = ajouterCarteMain(main(JA),piocher(pioche(JA)))
-    JA = setMain(JA,nouvelleMain)
+    ajouterCarteMain(main(JA),piocher(pioche(JA)))
 
     # 
     #==== Phase Action ====
@@ -109,18 +216,12 @@ while(not(finDePartieEff) and not(finDePartieRoi) and not(finDePartiePioche)) :
         #Envoi une unité de sa main sur la reserve
         if nbCarteMain(main(JA)) >= 1 :
 
-            ??????????????????????????
             print(descriptionMain(main(JA)))
             choix = int(input("Quelle carte voulez-vous envoyer en réserve ?"))
             
+            Carte = extraireCarteMain(main(JA),choix) 
+            envoiReserve(reserve(JA),Carte) 
             
-            Carte = extraireCarteMain(main(JA),choix) ?? Il faut aussi enlever la carte de la main ?? 
-            ??????????????????????????
-            ?? Comment savoir quelle carte il veut ?? Reussir à afficher une "liste" de carte ?? Comment faire 
-
-            nouvelleReserve = envoiReserve(reserve(JA),Carte) 
-            JA = setReserve(JA, nouvelleReserve)
-
             print("Votre carte est maintenant dans la réserve")
         else : #Si j'ai pas d'unité dans ma main je peux rien faire 
             print("Comment voulez-vous ajouter une carte à votre réserve si vous n'avez pas de carte dans votre main ?")
@@ -146,8 +247,8 @@ while(not(finDePartieEff) and not(finDePartieRoi) and not(finDePartiePioche)) :
         #Si c'est la premiere unité:
             choix = int(input("Votre carte doit aller au front. A quelle position voulez vous la mettre. 1, 2 ou 3\n Choix : "))#avec int() on vérifie que l'utilisateur nous renvoie bien un int
             position = "F"+str(choix)
-            nouveauFront = envoyerFront(front(champBataille(JA)),Carte,position) 
-            JA = setFront(JA,nouveauFront)
+            envoyerFront(front(champBataille(JA)),Carte,position) 
+        
         else : 
             choix = input("Où voulez-vous placer votre carte ?\nPosition : ")
             while(not(positionValide(choix))):
@@ -155,21 +256,21 @@ while(not(finDePartieEff) and not(finDePartieRoi) and not(finDePartiePioche)) :
     # 1.c - Une unité (C2) peut être placée sur une carte placée (C1) : 
 
             if(choix[0]=="F"):
+            
                 if(not(estVideFront(choix))):
                     #C1 va dans la reserve en fin de file 
                     CarteDejaPlacee = extraireFront(front(champBataille(JA)),choix)
-                    nouvelleReserve = envoiReserve(reserve(JA),CarteDejaPlacee) 
-                    JA = setReserve(JA, nouvelleReserve)
-                nouveauFront = envoyerFront(front(champBataille(JA),Carte,choix))
-                JA = setFront(champBataille(JA),nouveauFront)
+                    envoiReserve(reserve(JA),CarteDejaPlacee) 
+                envoyerFront(front(champBataille(JA),Carte,choix))
+                
             else : #si choix[0] == "A"
-                nouveauArriere = envoyerArriere(arriere(champBataille(JA)),Carte,choix)
-                JA = setArriere(champBataille(JA),nouveauArriere)
+                envoyerArriere(arriere(champBataille(JA)),Carte,choix)
 
     else : #action == 3  #Attaque 
         # == Attaquer ==
             veutAttaquer = True
-            while(not(touteHorizontale(champBataille(JA))) and veutAttaquer):                
+            touteHorizontale=touteHorizontale(champBataille(JA))
+            while(not(touteHorizontale) and veutAttaquer):                
                 # JA choisi une cible 
                 positionCible = input("Quelle est la position de la cible à attaquer ?\nChoix (sous la forme A1,A2,A3,F1,F2,F3) : ")
                 #Verification à faire :
@@ -178,7 +279,7 @@ while(not(finDePartieEff) and not(finDePartieRoi) and not(finDePartiePioche)) :
                     print("Attention la coordonnée entrée n'est pas valide")
                     positionCible = input("Quelle est la position de la cible à attaquer ?\nChoix (sous la forme A1,A2,A3,F1,F2,F3) : ")
 
-                cible = obtenirCarte(champBataille(JoueurAdverse,positionCible))
+                Cible = obtenirCarte(champBataille(JoueurAdverse,positionCible))
                 ciblePresente = True #La cible est dans le combat. Elle en sortira si elle est capturée ou tuée
 
                 # JA choisi sa / ses cartes d'attaque (boucle pour chaque carte) 
@@ -190,84 +291,68 @@ while(not(finDePartieEff) and not(finDePartieRoi) and not(finDePartiePioche)) :
                           
                     Carte = obtenirCarte(champBataille(JA),positionCarte)
                     
+                    if(estAPortee(Carte,Cible)):
+                        # Attaque la cible 
+                        # Elle passe en position offensive
+                        changementMode(Carte)
+                        
+                        # = Resultat de l'attaque =   
+                        # Si L'attaque de la carte = Defense cible et Degat == 0 :
+                        if (pointAttaque(Carte) == pointDefense(Cible)) and pointDegat(Cible) == 0 :
+                            # La cible est capturée
+                            capture(Cible)
+                            if roleCarte(Cible) == "Roi" : 
+                                finDePartieRoi = True 
+                            ciblePresente = False #La cible quitte le combat 
+                            # La carte va dans Royaume de JA = devient citoyen (Cartes gardent role dans royaume voir figure)
+                            entrerRoyaume(royaume(JA),Carte)
+                            # Sinon si Attaque C1 < Defense Cible - Degats déjà subits 
+                        elif (pointAttaque(Carte) < pointDefense(Cible) - pointDegat(Cible)) : 
+                            # La cible recoit autant de dégat que de point d'attaque de la carte de JA
+                            # Degat += Attaque carte
+                            Cible = setPointDegat(Cible,pointDegat(Cible)+pointAttaque(Cible))   
+                            ?? on sauvegarde le changement quelque part ?? 
+                            # Elle reste en place et pourra etre rattaquée 
+                        else : 
+                            # La carte va au cimetière (RIP)
+                            JA = setCimetiere(JA, entrerCimetiere(cimetiere(JA), Carte))
+                            ciblePresente = False #La cible quiite le combat  
+                            # Si une unité se trouve derrière elle, elle prend sa place
+                            if verifArriere(champBataille(JoueurAdverse),positionCible) :
+                                avancerCarte(champBataille(JA),positionCible) 
+                        # Il faut vérifier si le champ de bataille adverse est vide
+                        # Si le champ est vide:
+                            if champEstVide(JoueurAdverse) : 
+                                print("Attention il semblerait que le champ de bataille de "+ nom(JoueurAdverse) +" soit vide !")
 
-                # La carte doit être verticale (position défensive)                 #    
-                # Elle passe en position offensive
-                    changementMode(Carte)
-                # Attaque la cible 
+                                #Si il y a deux unités dans la réserve : 
+                                if (nbCarteReserve(reserve(JoueurAdverse))) >= 2 :
+                                    print("Super il y a assez de cartes dans la réserve !")
+                                    deploiementCarte(JoueurAdverse,2,0)
+                                else:
+                                    if nbCarteReserve(reserve(JoueurAdverse)) == 1 :
+                                        if nbCarteRoyaume((JoueurAdverse)) >= 1 :
+                                            #on demande une carte de la reserve et une carte de sa main 
+                                            deploiementCarte(JoueurAdverse,1,1)
+                                        else :
+                                            print("Le royaume s'effrondre")
+                                            effronde(royaume(JoueurAdverse))
+                                            finDePartieEff = True
 
-                # = Resultat de l'attaque =   
-                # Si L'attaque de la carte = Defense cible et Degat == 0 :
-                    if (pointAttaque(Carte) == pointDefense(Cible)) and pointDegat(Cible) == 0 :
-                        # La cible est capturée
-                        capture(Cible)
-                        if roleCarte(Cible) == "Roi" : 
-                            finDePartieRoi = True 
-                        ciblePresente = False #La cible quitte le combat 
-                        # La carte va dans Royaume de JA = devient citoyen (Cartes gardent role dans royaume voir figure)
-                        entrerRoyaume(royaume(JA),Carte)
-                        # Sinon si Attaque C1 < Defense Cible - Degats déjà subits 
-                    elif (pointAttaque(Carte) < pointDefense(Cible) - pointDegat(Cible)) : 
-                        # La cible recoit autant de dégat que de point d'attaque de la carte de JA
-                        # Degat += Attaque carte
-                        Cible = setPointDegat(Cible,pointDegat(Cible)+pointAttaque(Cible))   
-                        ?? on sauvegarde le changement quelque part ?? 
-                        # Elle reste en place et pourra etre rattaquée 
-                    else : 
-                        # La carte va au cimetière (RIP)
-                        JA = setCimetiere(JA, entrerCimetiere(cimetiere(JA), Carte))
-                        ciblePresente = False #La cible quiite le combat  
-                        # Si une unité se trouve derrière elle, elle prend sa place
-                        if verifArriere(champBataille(JoueurAdverse),positionCible) :
-                            avancerCarte(champBataille(JA),positionCible) 
-                    # Il faut vérifier si le champ de bataille adverse est vide
-                    # Si le champ est vide:
-                        if champEstVide(JoueurAdverse) : 
-                            print("Attention il semblerait que le champ de bataille du "+ nom(JoueurAdverse) +" soit vide !")
+                                    elif nbCarte(reserve(JoueurAdverse)) == 0 :
+                                        if nbCarte(main(JoueurAdverse)) >= 2 :
+                                            #On demande deux carte de sa main
+                                            deploiementCarte(JoueurAdverse,0,2)
+                                        else : 
+                                            print("Le royaume s'effrondre")
+                                            effronde(royaume(JoueurAdverse))
+                                            finDePartieEff = True
+                    else :
+                        
+                        print("Attention, la cible n'est pas à la portée de votre carte !!")
 
-                            #Si il y a deux unités dans la réserve : 
-                            if (nbCarte(reserve(JoueurAdverse))) >= 2 :
-                                print("Super il y a assez de cartes dans la réserve !")
-                                for i in range(2) :
-                                    positionCarteSecours = input(nom(JoueurAdverse) + ", où voulez-vous placer la carte de votre réserve ?")
-                                    while(not(estPosition(positionCarteSecours)) or not(estVidePosition(champBataille(JoueurAdverse),positionCarteSecours))) : 
-                                    #Arret : Qd la position est bonne & qd la position est vide
-                                    #pousuite : qd la position est fausse ou qd la position est non vide
-                                        positionCarteSecours = input(nom(JoueurAdverse) + "veuillez indiquer une position valide ! Où voulez-vous placer la carte de votre réserve ?")
-                                    Carte = premiereCarteReserve(reserve(JoueurAdverse))
-
-                                    #On place sur le champs de bataille
-                                    if(positionCarteSecours[0] == "F"): 
-                                        
-                                        nouveauFront = envoyerFront(front(champBataille(JoueurAdverse)),Carte,positionCarteSecours) 
-                                        JA = setFront(JA,nouveauFront)
-                                    else: #si choix[0] == "A"
-                                        
-                                        nouveauArriere = envoyerArriere(arriere(champBataille(JoueurAdverse)),Carte,positionCarteSecours)
-                                        JA = setArriere(champBataille(JA),nouveauArriere)
-
-                            else:
-                                
-                                if nbCarte(reserve(JoueurAdverse)) == 1 :
-                                    if nbCarte(main(JoueurAdverse)) >= 1 :
-                                        ??? ici il semblerait que je doive mettre quelque chose de similaire à ce qu il y a plus haut.
-                                        ??? On peut faire des fonctions hors du main qui ne sont pas dans la spec fonctionnelle ?? 
-                                    else :
-                                        print("Le royaume s'effrondre")
-                                        effronde(royaume(JoueurAdverse))
-                                        finDePartieEff = True
-                                        
-                                elif nbCarte(reserve(JoueurAdverse)) == 0 :
-                                    if nbCarte(main(JoueurAdverse)) >= 2 :
-                                        ?? Pareil qu'en haut'
-                                    else : 
-                                        print("Le royaume s'effrondre")
-                                        effronde(royaume(JoueurAdverse))
-                                        finDePartieEff = True
-
-                                        
-
-                                ??VeutAttaquer et veutattaquerCible 
+                    veutAttaquerCible = demandeAttaquerCible(JA) 
+                    
             #        #            #Sinon Si on peut compléter: 
             #        #                #On utilise une (ou aucune) carte de la reserve et on complète avec les cartes de son royaume
             #        #                # Impossible de poser la seconde carte sur la premiere
@@ -275,6 +360,12 @@ while(not(finDePartieEff) and not(finDePartieRoi) and not(finDePartiePioche)) :
             #        #                #Le royaume s'effondre
             #        #                
             #        # = FIN Resultat de l'attaque =
+                    
+                touteHorizontale=touteHorizontale(champBataille(JA))
+                if(not(touteHorizontale)): 
+                    print("Vous pouvez encore attaquer")
+                    veutAttaquer = demanderAttaquer(JA)
+
             #
             # 
 
@@ -288,16 +379,12 @@ while(not(finDePartieEff) and not(finDePartieRoi) and not(finDePartiePioche)) :
     #    # Sinon 
     #        # JA peut ajouter au royaume une carte de sa main
 
-    if(nbCarteMain(JA)>=6 or demandeDevelop(JA)):
-        ??????????????????????????
+    if(nbCarteMain(main(JA))>=6 or demandeDevelop(JA)):
+      
         print(descriptionMain(main(JA)))
-        choix = int(input(nom(JA) + " Quelle carte voulez-vous envoyer au royaume ?"))
-        Carte = extraireCarteMain(main(JA),choix) ?? Il faut aussi enlever la carte de la main ?? 
-        ??????????????????????????
-        ?? Comment savoir quelle carte il veut ?? Reussir à afficher une "liste" de carte ?? Comment faire 
-
-        nouveauRoyaume = entrerRoyaume(royaume(JA),Carte) 
-        JA = setRoyaume(JA, nouveauRoyaume)
+        choix = int(input(nom(JA) + ", quelle carte voulez-vous envoyer au royaume ?"))
+        Carte = extraireCarteMain(main(JA),choix)
+        entrerRoyaume(royaume(JA),Carte) 
 
     # ==== FIN PHASE DEVELOPPEMENT ====
     
@@ -311,10 +398,12 @@ while(not(finDePartieEff) and not(finDePartieRoi) and not(finDePartiePioche)) :
         #Soit Fin de la guerre : Aucun joueur n'a de pioche
     if(nbCartePioche(pioche(JA)) == 0 and nbCartePioche(pioche(JoueurAdverse)) == 0):
         finDePartiePioche = True
+        
+    print("Fin du tour")
     
               
 # Changement de joueur actif (JA)
-    Partie = changeJoueurCourant(Partie)
+    changeJoueurCourant(Partie)
     
 if finDePartiePioche : 
     if nbCarteRoyaume(royaume(JA)) > nbCarteRoyaume(royaume(JoueurAdverse)) :
