@@ -43,6 +43,13 @@ def pioche(joueur) :
     
     pass
 
+def reserve(joueur) :
+    # Pre-condition : Le joueur doit être de la partie, il est de type Joueur
+    # Post-condition : Aucune
+    # Resultat : Retourne la reserve du joueur entré en paramètre
+    
+    pass
+
 def cimetiere(joueur) :
     # Pre-condition : Le joueur doit être de la partie, il est de type Joueur
     # Post-condition : Aucune
