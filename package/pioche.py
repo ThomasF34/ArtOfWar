@@ -3,7 +3,7 @@
 def creerPioche(indice) :
     # Pre-condition : Int donné en parametre (indice) est un entier egal à 1 ou 2.
     # Post-condition : Aucune
-    # Resultat : Créer un élément de Type Pioche dans laquelle il y aura : 9 cartes avec le Role = "Archer", 6 cartes avec Role = "Garde" et 5 cartes dont le Role = "Soldat" et un roi avec le Role = "Roi". Le Int indique l'indice du Roi. La fonction renvoie la pioche créée 
+    # Resultat : Créer un élément de Type Pioche dans laquelle il y aura : 9 cartes avec le Role = "Archer", 6 cartes avec Role = "Garde" et 5 cartes dont le Role = "Soldat". La fonction renvoie la pioche créée 
     
     pass
 
