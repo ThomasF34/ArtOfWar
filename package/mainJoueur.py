@@ -1,9 +1,9 @@
 # === === Main === === #
     
-def creerMain() : 
-    # Pre-condition : Aucune
+def creerMain(indice) : 
+    # Pre-condition : indice est de type Int
     # Post-condition : Aucune
-    # Resultat : Créer un element de type Main
+    # Resultat : Créer un element de type Main contenant une carte Roi correspondant à l'indice donné
     
     pass
 

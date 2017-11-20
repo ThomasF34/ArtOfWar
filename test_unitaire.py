@@ -40,7 +40,8 @@ def testChangeJoueurCourant(Partie):
     print("# Test 3:")
     joueurCourant = joueurCourant(Partie)
     changeJoueurCourant(Partie)
-    if (nouveauJoueurCourant == joueurAdverse(Joueur)):
+    nouveauJoueurCourant = joueurCourant(Partie)
+    if (nouveauJoueurCourant == joueurAdverse(joueurCourant)):
         print("La fonction changeJoueurActif() fonctionne correctement !")
     else: 
         print("La fonction changeJoueurCourant() n'a pas correctement changée le joueur Courant")
@@ -82,7 +83,7 @@ def testCreerReserve():
 
 def testCreerPioche():
     print("# Test 7:")
-    if nbCartePioche(creerPioche()) == 0:
+    if nbCartePioche(creerPioche()) == 20:
         print("La création de pioche fonctionne correctement")
     else:
         print("La création de pioche n'est pas fonctionnel...")
@@ -90,7 +91,7 @@ def testCreerPioche():
         
 def testCreerMain():
     print("# Test 8:")
-    if nbCarteMain(creerMain()) == 0:
+    if nbCarteMain(creerMain()) == 1: #Il y a un roi dans la main 
         print("La fonction de création retourne bien une main vide")
     else:
         print("La fonction de création ne retourne pas une main vide")
@@ -126,12 +127,12 @@ def testPiocher(pioche):
 
 def testAjouterPioche(pioche):
     print("# Test 11:")
-    pre-pioche = nbCarte(pioche)
+    pre-pioche = nbCartePioche(pioche)
     carte = piocher(pioche)
-    post-pioche = nbCarte(pioche)
+    post-pioche = nbCartePioche(pioche)
     if pre-pioche == post-pioche+1: 
         ajouterCartePioche(pioche,carte)
-        if nbCartePioche(pioche) == post-pioche:
+        if nbCartePioche(pioche) == pre-pioche:
             print("La fonction d'ajoute de carte fonctionne correctement !")
         else: 
             print("La carte n'a pas été ajoutée correctement")
@@ -145,20 +146,15 @@ def testEstVideChamp(champ):
         print("La fonction estVide(champ) fonctionne correctement")
     else:
         print("La fonction n'est pas correcte.")
+        
 def testNbCarteChampBataille(champ)
+    print("# Test 13:")
     if nbCarteChampBataille(champ) == 0:
         print("La fonction nbCarteChampBataille() fonctionne correctement !")
     else:
         print("La fonction nbCarteChampBataille() ne fonctionne pas correctement.")
 
-def testExtraireCarteMain(main):
-    print("# Test 13:")
-    indice = 3
-    carte = main[3] 
-    if extraireCarteMain(main,indice) == carte:
-        print("La carte est extraite correctement !")
-    else: 
-        print("La carte n'est pas extraite correctement.")
+
 
 def testEnvoyerFront(front,carte,position):
     print("# Test 14:")
@@ -237,7 +233,7 @@ def testEstVidePosition(champ,position):
     positionBis = "A1"
     if not(estVidePosition(champ,position)) and estVidePosition(champ,positionBis):
         print("La fonction estVidePosition fonctionne correctement")
-    elif estVidePosition(champ,position)
+    elif estVidePosition(champ,position) :
         print("La fonction estVide ne fonctionne pas, une carte devrait se trouver en A2, verifier la fonction envoyerArriere() ou la fonction estVidePosition.")
     else:
         print("La fonction estVidePosition ne fonctionne vraiment pas du tout !")
@@ -251,9 +247,9 @@ def testAvancerCarte(champ,position):
     carteter = obtenirCarte(champ,"A2")
     if roleCarte(carte) == roleCarte(carteBis):
         print("La fonction avancerCarte() fonctionne. La carte a correctement été envoyée au front")
-    elif carte == carteter
+    elif carte == carteter :
         print("La carte n'a pas bougée ou a été dupliquée sans modifier sa position")
-    else:
+    else :
         print("La fonction avancerCarte() ne fonctionne pas.")
         
 def testEnvoiReserve(reserve,carte):
@@ -273,23 +269,19 @@ def testPremiereCarteReserve(reserve,carte):
         print("La fonction premiere carte reserve fonctionne correctement !")
     else:
         print("La fonction premiere carte reserve ne fonctionne pas correctement !")
-    
-def testEntrerCimetiere(cimetiere,carte):
-    print("# Test 26:")
-    entrerCimetiere(cimetiere,carte)
-    if nbCarteCimetiere(cimetiere) == 0
+
     
 def testEntrerRoyaume(royaume,carte):
-    print("# Test 27:")
+    print("# Test 26:")
     entrerRoyaume(royaume,carte)
     if nbCarteRoyaume(royaume) == 0:
         print("La fonction entrerRoyaume() n'a pas ajoutée la carte, le royaume est vide.")
-        print("La fonction nbCarteRoyaume() ne fonctionne peu etre pas...")
+        print("La fonction nbCarteRoyaume() ne fonctionne peut etre pas...")
     elif nbCarteRoyaume(royaume) == 1:
         print("La fonction entrerRoyaume() a bien ajoutée une carte !")
     
 def testExtraireRoyaume(royaume,role):
-    print("# Test 28:")
+    print("# Test 27:")
     if nbCarteRoleRoyaume(role) == 1:
         print("La fonction nbCarteRoleRoyaume() fonctionne correctement !")
         carteExtraire = extraireRoyaume(royaume,role)
@@ -304,7 +296,7 @@ def testExtraireRoyaume(royaume,role):
         print("La fonction nbCarteRoleRoyaume ne fonctionne pas. Vérifier également le test d'entree dans le royaume.")
     
 def testEffondre(royaume):
-    print("# Test 29:")
+    print("# Test 28:")
     royaume = effondre(royaume)
     if estEffondre(royaume):
         print("Le royaume est effectivement effondré")
@@ -312,19 +304,23 @@ def testEffondre(royaume):
         print("La fonction d'éffondrement OU de vérification d'éffondrement ne fonctionne pas correctement, vérifier effondre() et estEffondre() ")
     
 def testChangementMode(carte):
-    print("# Test 30:")
+    print("# Test 29:")
     if estVerticale(carte):
-        changementModecarte(carte)
+        changementModeCarte(carte)
         if estVerticale(carte):
             print("La fonction changementMode() ne fonctionne pas.")
-        if not(EstVerticale(carte)):
+        if not(estVerticale(carte)):
             print("La fonction changementMode() fonctionne correctement")
     else:
-        if EstVerticale(carte):
+        changementModeCarte(carte)
+        if estVerticale(carte):
             print("La fonction changementMode() fonctionne correctement")
+        if not(estVerticale(carte)):
+            print("La fonction changementMode() ne fonctionne pas.")
+            
         
 def testTouteHorizontale(champ,carte):
-    print("# Test 31:")
+    print("# Test 30:")
     redresseCartes(champ)
     if touteHorizontale(champ):
         print("Erreur, les cartes sont sencés être redréssées mais la fonction touteHorizontale() dit quelles sont toutes horizontales !")
@@ -334,16 +330,16 @@ def testTouteHorizontale(champ,carte):
             
         
 def testCapture(carte,Joueur):
-    print("# Test 32:")
+    print("# Test 31:")
     role = roleCarte(carte)
     capture(carte,Joueur)
-    if nbCarteRoleRoyaume(royaume(Joueur),role) ==1:
+    if nbCarteRoleRoyaume(royaume(Joueur),role) == 1:
         print("La fonction capture() fonctionne correctement !")
     else:
         print("La fonction capture() ne foctionne pas !")
     
 def testSetPositionCarte(carte,pos):
-    print("# Test 33:")
+    print("# Test 32:")
     positionBase = positionCarte(carte)
     carteDeplacee = setPositionCarte(carte,pos)
     if positionCarte(carteDeplacee) == positionBase:
@@ -410,7 +406,6 @@ testNbCarteChampBataille(champ(JoueurTest1))
 
 # ===== ==== Test d'ajout une carte au front au Joueur1
 # == On test d'abbord d'etraire une carte de la main 
-testExtraireCarteMain(main(JoueurTest1))
                       
 indice = 1
 # = On extrait la carte
@@ -444,7 +439,7 @@ testEnvoyerArriere(arriere(champBataille(JoueurTest1)),carte,positionArriere)
       
 # ===== ==== Test d'ajout une carte a l'arriere au Joueur2
 
-testExtraireCarteMain(main(JoueurTest2)
+
 indice = 1
 carte = extraireCarteMain(main(JoueurTest2),indice)
 
