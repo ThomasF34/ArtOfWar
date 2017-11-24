@@ -2,7 +2,7 @@
 # === === Main === === #
     
 def creerMain(indice) : 
-    # Pre-condition : indice est de type Int
+    # Pre-condition : Indice est de type Int et compris entre 1 et 2
     # Post-condition : Aucune
     # Resultat : Créer un element de type Main contenant une carte Roi correspondant à l'indice donné
     
@@ -15,7 +15,7 @@ def descriptionMain(main) :
     
     pass
 
-def extraireCarteMain(main,i) : 
+def extraireCarteMain(main) : 
     # Pre-condition : main est de Type Main, i l'indice de la carte voulue 
     # Post-condition : Aucune
     # Resultat : Renvoie la i-eme carte de la main. La main est modifiée : On enleve la carte de la main. (I-eme carte dans l'ordre utilisé pour la descritpionMain. en récupérant l'exemple précedent : en utilisant extraireCarteMain(main,2) on obtient la carte de role "Garde"). 

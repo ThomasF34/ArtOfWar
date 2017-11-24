@@ -225,10 +225,12 @@ while(not(finDePartieEff) and not(finDePartieRoi) and not(finDePartiePioche)) :
 
     if action == 0 : #Aucune action 
         print(nom(JA)+" ne fait aucune action !")
+        
+
     elif action == 1 : 
     # == Met en Reserve ==
         #Envoi une unité de sa main sur la reserve
-        if nbCarteMain(main(JA)) >= 1 :
+        if nbCarteMain(main(JA)) >= 1  and not(estPleineReserve(reserve(JA))):
 
             print(descriptionMain(main(JA)))
             choix = int(input("Quelle carte voulez-vous envoyer en réserve ?"))
@@ -237,6 +239,10 @@ while(not(finDePartieEff) and not(finDePartieRoi) and not(finDePartiePioche)) :
             envoiReserve(reserve(JA),Carte) 
             
             print("Votre carte est maintenant dans la réserve")
+            
+        elif estPleineReserve(reserve(JA)) and nbCarteMain(main(JA)) >= 1:
+            print("Votre réserve est pleine, vous ne pouvez ajouter une nouvelle carte !")
+            
         else : #Si j'ai pas d'unité dans ma main je peux rien faire 
             print("Comment voulez-vous ajouter une carte à votre réserve si vous n'avez pas de carte dans votre main ?")
 

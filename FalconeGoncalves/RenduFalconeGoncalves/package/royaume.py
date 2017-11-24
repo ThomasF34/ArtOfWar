@@ -1,7 +1,7 @@
 #coding:utf-8
 # === === Royaume === === #
     
-def creerRoyaume() :
+done def creerRoyaume() :
     # Pre-condition : Aucune
     # Post-condition : Aucune
     # Resultat : Créer un element de Type Royaume
@@ -14,14 +14,14 @@ def extraireRoyaume(royaume,role) :
     # Resultat : renvoie une carte ayant Role = role. Le royaume est donc modifié car la carte a été retirée du royaume
     pass 
 
-def entrerRoyaume(royaume,carte) : 
+done def entrerRoyaume(royaume,carte) : 
     # Pre-condition : royaume est de type Royaume, carte est de type Carte 
     # Post-condition : Aucune
     # Resultat : Ajoute la carte entrée en paramètre dans le royaume. Le royaume est modifié et renvoyé 
     
     pass
 
-def nbCarteRoyaume(royaume) : 
+done def nbCarteRoyaume(royaume) : 
     # Pre-condition : royaume est de type Royaume 
     # Post-condition : Aucune
     # Resultat : Retourne le nombre de citoyens (cartes) dans le royaume placé en paramètre

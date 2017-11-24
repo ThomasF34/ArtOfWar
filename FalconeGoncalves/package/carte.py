@@ -1,6 +1,11 @@
 #coding:utf-8
 # === === Carte === === #
     
+def creerCarte():
+    #Pre-condition : La carte renvoi un élément de type carte
+    #Post-condition : 
+    #Resultat : 
+    
 def estVerticale(carte) :
     # Pre-condition : La carte est de type Carte.
     # Post-condition : Aucune

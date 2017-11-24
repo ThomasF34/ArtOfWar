@@ -23,9 +23,13 @@ def nbCarteReserve(reserve) :
     pass
 
 def envoiReserve(reserve,carte): 
-    # Pre-condition : la reserve est de type Reserve et la carte de type Carte
+    # Pre-condition : la reserve est de type Reserve et la carte de type Carte 
     # Post-condition : Aucune
     # Resultat : la carte donnée est envoyée à la reserve !! EN FIN DE FILE !!
     
     pass
     
+def estPleineReserve(reserve):
+    #Pre-condition : La fonction prend en paramètre une réserve.
+    #Post-Condition : Aucune 
+    #Resultat : La fonction retourne True si la reserve est pleine (5cartes), retourne false sinon

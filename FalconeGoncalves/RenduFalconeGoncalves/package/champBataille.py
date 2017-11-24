@@ -1,7 +1,7 @@
 #coding:utf-8
 # === === Champs Bataille === === #
 
-def creerChampBataille():
+done def creerChampBataille():
     # Pre-condition : Le joueur entré en paramètre ne doit pas avoir de champ de bataille existant
     # Post-condition : Aucune
     # Resultat : Crée un champ de bataille vide. Crée un front et un arriere, les associent au champ créé et renvoie le champ.
@@ -15,34 +15,38 @@ def redresseCartes(champ):
     
     pass
 
-def estVide(champ) :
+done def estVide(champ) :
     # Pre-condition : le champ est de type ChampBataille
     # Post-condition : Aucune
     # Resultat : Retourne True si aucune carte n'est placée sur le champs de bataille, false sinon
     
     pass
 
+<<<<<<< Updated upstream:FalconeGoncalves/RenduFalconeGoncalves/package/champBataille.py
 def obtenirCarte(champ,pos) :
+=======
+done def obtenirCarte(champ,pos)
+>>>>>>> Stashed changes:package/champBataille.py
     # Pre-condition : La position (pos de type String) entrée en paramètre doit correspondre à une position du plateau et une carte doit se trouver à cet emplacement. champ est de type ChampBataille
     # Post-condition : Aucune
     # Resultat : Renvoie la carte se trouvant à cette position SANS l'enlever
     
     pass
 
-def nbCarteChampBataille(champ):
+done def nbCarteChampBataille(champ):
     # Pre-condition : Aucune
     # Post-condition : Aucune
     # Resultat : Indique le nombre de carte présente dans le champ de bataille
     pass
 
-def front(champ):
+done def front(champ):
     # Pre-condition : le champ est de type ChampBataille
     # Post-condition : Aucune
     # Resultat : retourne le front du champ entré en paramètre
     
     pass
 
-def arriere(champ):
+done def arriere(champ):
     # Pre-condition : le champ est de type ChampBataille
     # Post-condition : Aucune
     # Resultat : retourne l'arriere du champ entré en paramètre
@@ -56,7 +60,7 @@ def touteHorizontale(champ):
     
     pass
 
-def estVidePosition(champ,pos):
+done def estVidePosition(champ,pos):
     # Pre-condition : pos est un string
     # Post-condition : Aucune
     # Resultat : Retourne True si la position contient une carte (en utilisant les fonction estVideFront et estVideArriere)
@@ -71,7 +75,11 @@ def verifArriere(champ,pos):
     pass
 
 def avancerCarte(champ,pos):
+<<<<<<< Updated upstream
     # Pre-condition : La position donnée en paramètres est precedemment occupée par une carte au front et une autre carte se situe derriere elle
+=======
+    # Pre-condition : La position donnée en paramètres etait précédemment occupée par une carte au front et une autre carte se situe derriere elle
+>>>>>>> Stashed changes
     # Post-condition : Aucune
     # Resultat : Modifie le champ de bataille dans lequel la carte (située à l'arriere) est envoyée au front. La fonction retourne aussi ce champ. 
     

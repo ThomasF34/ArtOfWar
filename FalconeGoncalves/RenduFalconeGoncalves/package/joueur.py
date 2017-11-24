@@ -20,7 +20,7 @@ def champBataille(joueur) :
     # Pre-condition : Le joueur doit être de la partie, il est de type Joueur
     # Post-condition : Aucune
     # Resultat : retourne le champ de bataille du joueur entré en paramètre
-    
+
     pass
 
 def main(joueur) : 
