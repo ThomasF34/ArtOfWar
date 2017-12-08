@@ -22,11 +22,11 @@ def placer_dans_cdb(c, cdb, p):
 
 
 
-#est_dans_cdb: int x cdb -> bool
+#est_dans_cdb: carte x cdb -> bool
 #Indique si une carte en particulier est dans le cdb
-#ident : c'est l'ident de la carte 
+#carte : c'est la carte 
 #cdb : champ de bataille dans lequel on effectue la recherche
-def est_dans_cdb(ident,cdb):
+def est_dans_cdb(carte,cdb):
     return 0
 
 
