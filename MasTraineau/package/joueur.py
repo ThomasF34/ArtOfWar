@@ -11,38 +11,38 @@
 #FG : Structure de donnée choisie 
 # {'ident' : int, 'pioche' : pioche,'main' : main,'royaume' : royaume,'cdb' : cdb,'cimetiere' : cimetiere,'reserve' : reserve}
 def creer_joueur(ident, pioche, main, royaume, cdb, cimetiere, reserve):
-	return 0
+	return {'ident':ident,'pioche':pioche,'main':main,'royaume':royaume,'cdb':cdb,'cimetiere':cimetiere,'reserve':reserve}
+
 
 #Renvoi la pioche du joueur
 #get_pioche : joueur -> pioche
 def get_pioche(joueur):
-	return 0
+	return joueur['pioche']
 
 #Renvoi le champ de bataille du joueur
 #get_pioche : joueur -> cdb
 def get_cdb(joueur):
-	return 0
+	return joueur['cdb']
 
 #Renvoie la réserve d’un joueur
 #get_reserve : joueur -> reserve
 def get_reserve(joueur):
-    return 0
+    return joueur['reserve']
 
 #Renvoie le royaume d’un joueur
 #get_royaume : joueur -> royaume
 def get_royaume(joueur):
-    return 0
+    return joueur['royaume']
 
 #Renvoie le cimetière d’un joueur
 #get_cimetière : joueur -> cimetière
 def get_cimetiere(joueur):
-    return 0
+    return joueur['cimetiere']
 
 #Renvoie la main d’un joueur
 #get_main(joueur) : joueur -> Main
 def get_main(joueur):
-    return 0
-
+	return joueur['main']
     
 #Reinitialiser_carte: joueur -> joueur
 #Remet la défense et le marqueur de touche de toutes les cartes du champ de bataille et du royaume du joueur j à leur état initial.

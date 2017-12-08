@@ -8,6 +8,7 @@
 # FG : Structure décidée 
 # (Case)[6]
 # Case:(Carte | "Vide")
+
 def creer_cdb():
     return 0
 
@@ -15,8 +16,6 @@ def creer_cdb():
 #Ajoute une carte c sur le champ de bataille cdb à la position p, in/out.
 #Il ne faut pas oublier de prendre en compte le fait que si on place une carte sur une position occupé alors la carte occupant la position est remplacée et renvoyée dans la main
 #resultat : champ_de_bataille auquel on a ajouté c 
-
-#FG : Pour etre en accord avec la description de la main, on prend en parametre l'identifiant de la carte et non la carte directement.
 def placer_dans_cdb(c, cdb, p):
     return 0
 
@@ -110,3 +109,7 @@ def possibilite_attaquer(cdb1,cdb2):
 def avancer_unite(p, cdb):
     return 0
 
+#Renvoie la carte à la position pos du champ de bataille cdb
+# int x cdb -> carte
+def getCarteCDB(pos,cdb) : 
+	return 0

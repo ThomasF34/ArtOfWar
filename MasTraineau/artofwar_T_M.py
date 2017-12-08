@@ -216,7 +216,7 @@ def main():
                 #On demande la carte qui va attaquer et on effectue les vérifications nécessaires dessus
                 #elle doit être dans le cdb du joueur et en position défensive
                	IDcarte_choisi = input("Avec quelle carte souhaitez vous attaquer ?")
-				carte_choisi = getCarte(deckGen,IDcarte_choisi)
+				carte_choisi = getDeck(deckGen,IDcarte_choisi)
 
                 while not est_dans_cdb(carte_choisi,get_cdb(joueur)) or not est_en_posture_defensive(carte_choisi,get_cdb(joueur)):
                     if not est_dans_cdb(carte_choisi,get_cdb(joueur)) :
@@ -232,13 +232,13 @@ def main():
                 #On demande la cible à attaquer et on effectue les vérifications dessus 
                 IDcible = input("Quelle carte adverse souhaitez vous attaquer ?")
                 cible = getCarte(deckGen,IDcible)
-                #Vérification de portée
-                est_a_portee = touche(carte_choisi, cible)
-                
-                #Vérification de présence de la cible dans le cdb adverse
+
+				#Vérification de présence de la cible dans le cdb adverse et de portée
                 if joueur == joueur1 :
+					est_a_portee = touche(carte_choisi, cible, get_cdb(joueur1), get_cdb(joueur2))
                     est_dans_cdb_adverse = est_dans_cdb(cible, get_cdb(joueur2))
                 if joueur == joueur2 :
+					est_a_portee = touche(carte_choisi, cible, get_cdb(joueur2), get_cdb(joueur1))
                     est_dans_cdb_adverse = est_dans_cdb(cible, get_cdb(joueur1))
                 
                 while not est_a_portee or not est_dans_cdb_adverse :
@@ -246,12 +246,12 @@ def main():
                         IDcible = input("La cible n'est pas dans le cdb adverse, veuillez en choisir une autre")
                     elif not est_a_portee :
                         IDcible = input("La cible n'est pas à portée, veuillez en choisir une autre")                    
-					cible = getCarte(deckGen,IDcible)
-					est_a_portee = touche(carte_choisi, cible)
-					
+					cible = getCarte(deckGen,IDcible)					
 					if joueur == joueur1 :
+						est_a_portee = touche(carte_choisi, cible, get_cdb(joueur1), get_cdb(joueur2))
 						est_dans_cdb_adverse = est_dans_cdb(cible, get_cdb(joueur2))
 					if joueur == joueur2 :
+						est_a_portee = touche(carte_choisi, cible, get_cdb(joueur2), get_cdb(joueur1))
 						est_dans_cdb_adverse = est_dans_cdb(cible, get_cdb(joueur1))
                 
                 passer_en_position_offensive(carte_choisi,get_cdb(joueur))
@@ -294,7 +294,7 @@ def main():
                         
                         IDcarte_choisi = input("Carte choisie : ")
 						carte_choisi = getDeck(deckGen,IDcarte_choisi)
-                        while not est_dans_royaume(carte_choisi) : 
+                        while not est_dans_royaume(carte_choisi,get_royaume(joueur)) : 
                                 carte_choisi = input("Carte choisie : ")
                         print("A quelle position voulez-vous la placer ?")
                         print(decrire_cdb(get_cdb(joueur)))

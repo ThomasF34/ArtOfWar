@@ -5,34 +5,44 @@
 #Crée un royaume vide, in/out
 
 #FG / Structure de donnée 
-# (Carte)[0] puis on append à chaque ajout (c'est donc une liste)
+# (Carte)[] puis on append à chaque ajout (c'est donc une liste)
 def creer_royaume():
-    return 0
+    return []
 
 #placer_dans_royaume : carte x royaume -> royaume
 #Place une carte c dans le royaume r, in/out
-def placer_dans_royaume(c, r): 
-    return 0
-    
+def placer_dans_royaume(carte, roy): 
+    roy.append(carte)
+    return roy
 
 #get_nombre_carte_royaume: royaume -> int
 #Renvoie le nombre de carte d’un royaume roy 
 def get_nombre_carte_royaume(roy):
-    return 0
+    return len(roy)
 
 #Afficher_Royaume: royaume -> string
 #Décrit le royaume passer en paramètre sous forme de chaine de caractère, e.g : "5 Soldats, 2 Gardes, 3 Archers"
 def decrire_royaume(roy):
-    return 0
+    res = "Voici votre royaume : \n"
+	for c in roy[:-1] : 
+		res += str(getID(c)) + " " + get_type(c)+", "
+	res += str(getID(roy[-1])) + " " + get_type(roy[-1])
+	return res
 
 #Retirer_carte_royaume: royaume x carte -> royaume
 #Retire une carte c du royaume r, en in/out
-def retirer_du_royaume(r,c):
-    return 0
+def retirer_du_royaume(roy,carte):
+    roy.remove(carte)
+	return roy
 
-#verif
-
-#est_dans_royaume: carte -> bool
-#renvoie true si il existe au moins une carte du type de c dans le royaume
-def est_dans_royaume(c):
-    return 0
+#est_dans_royaume: carte x roy -> bool
+#renvoie true si il existe une carte de meme type que c dans le royaume #POURQUOI NE PAS DEMANDER LE TYPE DIRECTEMENT ?!
+def est_dans_royaume(carte,roy):
+	while i < len(roy)-1 : 
+		if get_type(roy[i]) == get_type(carte) :
+			return True
+		i++
+	return False 
+		
+	
+    
