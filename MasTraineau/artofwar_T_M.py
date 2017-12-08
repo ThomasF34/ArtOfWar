@@ -6,8 +6,11 @@ from package.main import *
 from package.pioche import *
 from package.reserve import *
 from package.royaume import *
+from package.cartesJeu import * 
 
 def main():
+	
+	deckGen = creerDeckGen()
     #On crée toutes les composantes nécessaires au jeu
     joueur1 = creer_joueur(1, creer_pioche(), creer_main(), creer_royaume(), creer_cdb(), creer_cimetiere(), creer_reserve())
     joueur2 = creer_joueur(2, creer_pioche(), creer_main(), creer_royaume(), creer_cdb(), creer_cimetiere(), creer_reserve())
@@ -20,7 +23,9 @@ def main():
 
     #On crée les roi pour les joueurs
     roi1 = creer_carte(0,"roi1","def")
+	ajouterCarte(deckGen,roi1)
     roi2 = creer_carte(1,"roi2","def")
+	ajouterCarte(deckGen,roi2)
     #---
 
 #Début de la phase de mise en place
@@ -41,10 +46,13 @@ def main():
     #Le premier joueur choisit une carte de sa main et la place sur sa ligne de front 
     #On affiche la main pour que le joueur connaisse les cartes qu'il a en main
     print(decrire_main(get_main(joueur1)))
-    carte_choisi = input("Choisir la carte à placer sur la ligne de front du joueur 1")
-    while not est_dans_main(carte_choisi) :
-        carte_choisi = input("Choisir la carte à placer sur la ligne de front du joueur 1")
-        
+    IDcarte_choisi = input("Choisir la carte à placer sur la ligne de front du joueur 1")
+	
+	#FG Il manquait ici la main dans la fonction est_dans_main
+    while not est_dans_main(IDcarte_choisi,get_main(joueur1)) :
+        IDcarte_choisi = input("Choisir la carte à placer sur la ligne de front du joueur 1")
+    carte_choisi = getCarte(deckGen, IDcarte_choisi)
+	
     #On affiche le champ de bataille pour que le joueur connaisse les positions disponibles
     print(decrire_cdb(get_cdb(joueur1)))
     case_choisi = input("Quelle case de la ligne de front ?" )
@@ -56,10 +64,11 @@ def main():
     
     #Le second joueur choisit une carte de sa main et la place sur sa ligne de front
     print(decrire_main(get_main(joueur2)))
-    carte_choisi = input("Choisir la carte à placer sur la ligne de front du joueur 2")
-    #Archer Garde Soldat Roi 
-    while not est_dans_main(carte_choisi) :
-        carte_choisi = input("Choisir la carte à placer sur la ligne de front du joueur 2")
+    IDcarte_choisi = input("Choisir la carte à placer sur la ligne de front du joueur 2")
+    while not est_dans_main(IDcarte_choisi,get_main(joueur2)) :
+        IDcarte_choisi = input("Choisir la carte à placer sur la ligne de front du joueur 2")
+		
+	carte_choisi = getCarte(deckGen,IDcarte_choisi)
         
     print(decrire_cdb(get_cdb(joueur2)))
     case_choisi = input("Quelle case de la ligne de front ?")
@@ -71,35 +80,41 @@ def main():
 
     #Le premier joueur choisit une carte de sa main et la place en réserve 
     print(decrire_main(get_main(joueur1)))
-    carte_choisi = input("Choisir la carte à placer en réserve du joueur 1")
-    while est_dans_main(carte_choisi) :
-        carte_choisi = input("Choisir la carte à placer en réserve du joueur 1")    
+    IDcarte_choisi = input("Choisir la carte à placer en réserve du joueur 1")
+	#FG Il manquait ici la main dans la fonction est_dans_main
+    while est_dans_main(IDcarte_choisi,get_main(joueur1)) :
+        IDcarte_choisi = input("Choisir la carte à placer en réserve du joueur 1") 
+	
+	carte_choisi = getCarte(deckGen,IDcarte_choisi)
+	
     placer_dans_reserve(carte_choisi, get_reserve(joueur1))
-    retirer_de_main(carte_choisi, get_main(joueur1))
+	retirer_de_main(carte_choisi, get_main(joueur1))
+
+    
     #---     
 
     #Le second joueur choisit une carte de sa main et la place en réserve 
     print(decrire_main(get_main(joueur2)))
-    carte_choisi = input("Choisir la carte à placer en réserve du joueur 2")
+    IDcarte_choisi = input("Choisir la carte à placer en réserve du joueur 2")
     while not est_dans_main(carte_choisi) :
-        carte_choisi = input("Choisir la carte à placer en réserve du joueur 2")    
-    placer_dans_reserve(carte_choisi, get_reserve(joueur2))
-    retirer_de_main(carte_choisi, get_main(joueur2))
-    #---
-#Fin de la phase de mise en place
+        IDcarte_choisi = input("Choisir la carte à placer en réserve du joueur 2")    
+    
+	carte_choisi = getCarte(deckGen, IDcarte_choisi)
+	placer_dans_reserve(carte_choisi, get_reserve(joueur2))
+	retirer_de_main(carte_choisi, get_main(joueur2))
 
+    #---
+	
+#Fin de la phase de mise en place
+#############################################################################################################################################
 
     joueur = joueur1 #Le joueur 1 commence le premier
 
-     
 #début de la boucle de jeu
-
 
     while not partie_fini :
 
     #Début de la phase conscription
-        
-        
             
     #--- Fin de la phase de conscription
     
@@ -108,7 +123,7 @@ def main():
         
         #On vérifie si le joueur a encore des cartes dans sa pioche, dans le cas contraire la partie est fini et on sort de la boucle de jeu (Fin de la guerre)
         if pioche_vide(get_pioche(joueur)):
-            partie_fini = true
+            partie_fini = True
             raison_fin = "f"
             joueur_sans_carte = joueur
             break
@@ -128,23 +143,26 @@ def main():
         
         #On demande l'action et on vérifie si c'est une action qui existe
         action = input("Que souhaitez vous faire ? \n (Action possible : -Ne rien faire (n) \n -Mettre en réserve (r) \n -Déployer unité (d) \n -Attaquer (a)")
-        action_valide = false    
+        action_valide = False    
         if(action == "n" or action == "r" or action == "d" or action == "a" ) :
-            action_valide = true
-        while (action_valide==false) :
-            print("L'action demandé n'existe pas, veuillez choisir une action qui existe")
+            action_valide = True
+        while (action_valide==False) :
+            print("L'action demandée n'existe pas, veuillez choisir une action qui existe")
             action = input("Que souhaitez vous faire ? \n (Action possible : -Ne rien faire (n) \n -Mettre en réserve (r) \n -Déployer unité (d) \n -Attaquer (a)")
             if(action == "n" or action == "r" or action == "d" or action == "a" ) :
-                action_valide = true
+                action_valide = True
                 
         #Mise en réserve    
         if action == "r" :
             print(decrire_main(get_main(joueur)))
-            carte_choisi = input("Quelle carte souhaitez vous envoyer en réserve ?")
-            while not est_dans_main(carte_choisi):
-                carte_choisi = input("Quelle carte souhaitez vous envoyer en réserve ?")
-            placer_dans_reserve(carte_choisi, get_reserve(joueur))
-            retirer_de_main(carte_choisi, get_main(joueur))
+            IDcarte_choisi = input("Quelle carte souhaitez vous envoyer en réserve ?")
+            while not est_dans_main(IDcarte_choisi,get_main(joueur)):
+                IDcarte_choisi = input("Quelle carte souhaitez vous envoyer en réserve ?")
+			
+			carte_choisi = getCarte(deckGen, carte_choisi)
+
+			placer_dans_reserve(carte_choisi, get_reserve(joueur))
+			retirer_de_main(carte_choisi, get_main(joueur))
         
         #Déploiement d'unité
         if action == "d" :
@@ -162,15 +180,18 @@ def main():
                 #fonction_interface.plusDeCarteEnReserve(joueur)
                 print("Vous n'avez plus de cartes en réserve, choisissez une carte de votre main")
                 print(decrire_main(get_main(joueur)))
-                carte_choisi = input("Quelle carte souhaitez vous envoyer sur le champ de bataille?")
-                while not est_dans_main(carte_choisi):
-                    carte_choisi = input("Quelle carte souhaitez vous envoyer sur le champ de bataille?")
+                IDcarte_choisi = input("Quelle carte souhaitez vous envoyer sur le champ de bataille?")
+                while not est_dans_main(IDcarte_choisi,get_main(joueur)):
+                    IDcarte_choisi = input("Quelle carte souhaitez vous envoyer sur le champ de bataille?")
+					
+				carte_choisi = getCarte(deckGen,IDcarte_choisi)
                 
                 print("A quelle position voulez-vous la placer ?")
                 print(decrire_cdb(get_cdb(joueur)))
                 case_choisi = input("Position choisie : ")
                 while not est_position_utilisable(get_cdb(joueur),case_choisi):
                     case_choisi = input("Position choisie : ")
+					
                 placer_dans_cdb(carte_choisi,get_cdb(joueur), case_choisi)            
                 retirer_de_main(get_main(joueur), carte_choisi)
         
@@ -193,34 +214,36 @@ def main():
             while not fin_attaque :
                 #On demande la carte qui va attaquer et on effectue les vérifications nécessaires dessus
                 #elle doit être dans le cdb du joueur et en position défensive
-                carte_choisi = input("Avec quelle carte souhaitez vous attaquer ?")
-                while not est_dans_cdb(carte_choisi,get_cdb(joueur)) or not est_en_posture_defensive(carte_choisi,get_cdb(joueur)):
-                    if not est_dans_cdb(carte_choisi,get_cdb(joueur)) :
-                        carte_choisi = input("Cette carte n'est pas dans le champ de bataille, veuillez en choisir une autre")
-                    elif not est_en_posture_defensive(carte_choisi,get_cdb(joueur)) :
-                        carte_choisi = input("Cette carte est déjà en position offensive, elle ne peut plus attaquer du tour, veuillez en choisir une autre")
+                IDcarte_choisi = input("Avec quelle carte souhaitez vous attaquer ?")
+                while not est_dans_cdb(IDcarte_choisi,get_cdb(joueur)) or not est_en_posture_defensive(IDcarte_choisi,get_cdb(joueur)):
+                    if not est_dans_cdb(IDcarte_choisi,get_cdb(joueur)) :
+                        IDcarte_choisi = input("Cette carte n'est pas dans le champ de bataille, veuillez en choisir une autre")
+                    elif not est_en_posture_defensive(IDcarte_choisi,get_cdb(joueur)) :
+                        IDcarte_choisi = input("Cette carte est déjà en position offensive, elle ne peut plus attaquer du tour, veuillez en choisir une autre")
                 
+				carte_choisi = getCarte(deckGen,IDcarte_choisi)
                 #On demande la cible à attaquer et on effectue les vérifications dessus 
-                cible = input("Quelle carte adverse souhaitez vous attaquer ?")
-                
+                IDcible = input("Quelle carte adverse souhaitez vous attaquer ?")
+                cible = getCarte(deckGen,IDcible)
                 #Vérification de portée
                 est_a_portee = touche(carte_choisi, cible)
                 
                 #Vérification de présence de la cible dans le cdb adverse
                 if joueur == joueur1 :
-                    est_dans_cdb_adverse = est_dans_cdb(cible, get_cdb(joueur2))
+                    est_dans_cdb_adverse = est_dans_cdb(IDcible, get_cdb(joueur2))
                 if joueur == joueur2 :
-                    est_dans_cdb_adverse = est_dans_cdb(cible, get_cdb(joueur1))
+                    est_dans_cdb_adverse = est_dans_cdb(IDcible, get_cdb(joueur1))
                 
                 while not est_a_portee or not est_dans_cdb_adverse :
                     if not est_dans_cdb_adverse :
                         cible = input("La cible n'est pas dans le cdb adverse, veuillez en choisir une autre")
                         if joueur == joueur1 :
-                            est_dans_cdb_adverse = est_dans_cdb(cible, get_cdb(joueur2))
+                            est_dans_cdb_adverse = est_dans_cdb(IDcible, get_cdb(joueur2))
                         if joueur == joueur2 :
-                            est_dans_cdb_adverse = est_dans_cdb(cible, get_cdb(joueur1))
+                            est_dans_cdb_adverse = est_dans_cdb(IDcible, get_cdb(joueur1))
                     elif not est_a_portee :
-                        cible = input("La cible n'est pas à portée, veuillez en choisir une autre")
+                        IDcible = input("La cible n'est pas à portée, veuillez en choisir une autre")
+						cible = getCarte(deckGen,IDcible)
                         est_a_portee = touche(carte_choisi, cible)
                 
                 passer_en_position_offensive(carte_choisi,get_cdb(joueur))

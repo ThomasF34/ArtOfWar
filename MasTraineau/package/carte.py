@@ -6,9 +6,9 @@
 #-les cartes ne peuvent pas avoir l'identifiant 0 et 1 car c'est l'identifiant des rois créé dans le main
 #-chaque cartes a un identifiant unique
 #id : entier qui identifie la carte.
-#type : chaine de caractère qui représente le type de la carte, e.g : "Soldat"
+#type : chaine de caractère qui représente le type de la carte, e.g : "Soldat" FG : Valeur parmi "Soldat" "Archer" "Garde" "Roi1" "Roi2" 
 #posture : chaine de caractère qui représente la posture de la carte, e.g : "def", par défaut les cartes sont créées en posture défensive
-def creer_carte(id, type, posture):
+def creer_carte(ident, typeCarte, posture):
     return 0
 
 #get_type: carte -> string
@@ -48,8 +48,11 @@ def get_attaque(c):
 def get_point_de_defense(c):
     return 0
 
-# COMBAT
+#FG : Il manque une fonction getID(carte) qui renvoie l'identifiant de la carte donnée 
+def getID(c):
+	return 0 
 
+# COMBAT
 #touche: carte x carte -> bool
 #Indique si la carte c2 est à portée de la carte c1
 #Résultat : true si c2 est à portée de c1
@@ -60,6 +63,8 @@ def touche(c1,c2):
 #La première carte c1 attaque la deuxième carte c2, on soustrait les points de défenses  
 #de la carte 2 par les points d’attaques de la carte 1 les paramètres sont passés en in/out
 #Ne pas oublier de vérifier si la carte attaqué et en position offensive ou défensive
+
+#FG : La modification de aEteTouche n'est pas définie. On passera aEteTouche à True quand la carte a été touchée. 
 def attaquer(c1,c2):
     return 0
 

@@ -3,6 +3,8 @@
 #Le cimetière est vide quand on le crée, on le remplit dans le main du programme
 
 #Crée un cimetière vide
+#FG / Structure de donnée 
+# (Carte)[0] puis on append à chaque ajout (c'est donc une liste)
 def creer_cimetiere():
     return 0
 

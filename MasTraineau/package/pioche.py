@@ -6,6 +6,9 @@
 #Crée une pioche complète.
 #Une pioche complète comprend 9 Soldats, 6 Gardes et 5 Archers
 #Utiliser la fonction creer_carte pour remplir la pioche
+
+#FG / Structure de donnée 
+# (Carte)[0] puis on append à chaque ajout (Elle se comportera comme une pile, avec la posibilité de mélanger la pile)
 def creer_pioche():
     return 0
 

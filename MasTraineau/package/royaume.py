@@ -3,6 +3,9 @@
 #Le royaume est vide quand on le crée, on le remplit dans le main du programme
 
 #Crée un royaume vide, in/out
+
+#FG / Structure de donnée 
+# (Carte)[0] puis on append à chaque ajout (c'est donc une liste)
 def creer_royaume():
     return 0
 

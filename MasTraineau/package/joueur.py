@@ -1,5 +1,5 @@
 #Crée un joueur.
-#id : identifiant du joueur, compris entre 1 et 2
+#ident : identifiant du joueur, compris entre 1 et 2
 #pioche : pioche du joueur
 #main : main du joueur
 #royaume : royaume du joueur
@@ -7,7 +7,10 @@
 #cimetiere : cimetière du joueur
 #reserve : réserve du joueur
 #creer_joueur : int x pioche x main x royaume x cdb x cimetiere x reserve-> joueur
-def creer_joueur(id, pioche, main, royaume, cdb, cimetiere, reserve):
+
+#FG : Structure de donnée choisie 
+# {'ident' : int, 'pioche' : pioche,'main' : main,'royaume' : royaume,'cdb' : cdb,'cimetiere' : cimetiere,'reserve' : reserve}
+def creer_joueur(ident, pioche, main, royaume, cdb, cimetiere, reserve):
 	return 0
 
 #Renvoi la pioche du joueur

@@ -5,6 +5,9 @@
 
 #Crée un champ de bataille vide
 
+# FG : Structure décidée 
+# (Case)[6]
+# Case:(Carte | "Vide")
 def creer_cdb():
     return 0
 
@@ -12,16 +15,18 @@ def creer_cdb():
 #Ajoute une carte c sur le champ de bataille cdb à la position p, in/out.
 #Il ne faut pas oublier de prendre en compte le fait que si on place une carte sur une position occupé alors la carte occupant la position est remplacée et renvoyée dans la main
 #resultat : champ_de_bataille auquel on a ajouté c 
+
+#FG : Pour etre en accord avec la description de la main, on prend en parametre l'identifiant de la carte et non la carte directement.
 def placer_dans_cdb(c, cdb, p):
     return 0
 
 
 
-#est_dans_cdb: string x cdb -> bool
+#est_dans_cdb: int x cdb -> bool
 #Indique si une carte en particulier est dans le cdb
-#type : c'est le type de la carte, e.g : "Archer"
+#ident : c'est l'ident de la carte 
 #cdb : champ de bataille dans lequel on effectue la recherche
-def est_dans_cdb(type_carte,cdb):
+def est_dans_cdb(ident,cdb):
     return 0
 
 
@@ -71,8 +76,8 @@ def est_position_utilisable(cdb,p):
     return 0
 
 #decrire_cdb: cdb -> string
-#Décrit le champs de bataille cdb, e.g :    "1. Garde, 2.Vide, 3.Soldat,
-#                                            4.Archer, 5.Vide, 6.Archer"
+#Décrit le champs de bataille cdb, e.g :    "1. Garde, 2. Vide, 3. Soldat,
+#                                            4. Archer, 5. Vide, 6. Archer"
 #cdb : champ de bataille à décrire
 def decrire_cdb(cdb):
     return 0

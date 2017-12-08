@@ -3,6 +3,9 @@
 #La réserve est vide quand on la crée, on la remplit dans le main du programme
 
 #Crée une réserve vide, en in/out
+
+#FG / Structure de donnée 
+# (Carte)[0] puis on append à chaque ajout (elle se comporte comme une File. On ne récupèrera la premiere carte posée FIFO)
 def creer_reserve():
     return 0
 
