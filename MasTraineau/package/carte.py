@@ -1,5 +1,5 @@
 ###carte
-
+# Carte(ident: Int, TypeCarte: Str, posture : Str, position : Int, Attaque : Int, Defense : Int)
 #creer_carte: int x string x string -> carte
 #Crée une carte. 
 #pré-condition :    
@@ -8,67 +8,195 @@
 #id : entier qui identifie la carte.
 #type : chaine de caractère qui représente le type de la carte, e.g : "Soldat" FG : Valeur parmi "Soldat" "Archer" "Garde" "Roi1" "Roi2" 
 #posture : chaine de caractère qui représente la posture de la carte, e.g : "def", par défaut les cartes sont créées en posture défensive
-def creer_carte(ident, typeCarte, posture):
-    return 0
+
+
+
+# Carte(ident:Int, TypeCarte:Str, posture:Str,  Attaque:Int, Defense:[Int](2) )
+
+
+def creer_carte(ident, typeCarte, posture, defense1, defense2):
+    carte = {ident : ident, typeCarte : typeCarte, posture: posture defenseDef:defense1, defenseOff : defense2}
+    return carte
+
 
 #get_type: carte -> string
-#Renvoie le type de la carte c
-def get_type(c):
-    return 0
+#Renvoie le type de la carte
+
+def get_type(carte):
+    return carte[1]
 
 #get_position: carte x cdb -> int
 #Renvoie la position (coordonnée) de la carte c sur le champ de bataille cdb
 def get_position(c,cdb):
-    return 0
+    i = 0
+    while i<len(cdb)-1:
+        carteCdb = getCarteCDB(i)
+        if getID(c) == getID(carteCDB)
+            return i
+        i+=1
 
-#est_en_posture_defensive: carte x cdb-> bool
+#est_en_posture_defensive: Carte x cdb-> bool
 #vérifie si une carte est en position défensive dans un cdb
 #pré-condition : la carte doit être dans le cdb
 #résultat : True si la carte est en position défensive, false sinon
-def est_en_posture_defensive(c,cdb):
-    return 0
+def est_en_posture_defensive(carte,cdb):
+    if carte[1] == "def":
+        return True
+    else:
+        return False
 
+    
 #mettre_en_offensif: carte -> carte
 #met une carte c en état offensif en in/out
-def mettre_en_offensif(c):
-    return 0
+def mettre_en_offensif(carte):
+    carte.posture = "off"
+    return carte
 
 #mettre_en_defensive: carte -> carte
 #met une carte c en état défensif in/out
 def mettre_en_defensive(c):
-    return 0
+    carte.posture = "def"
+    return carte
 
 #get_attaque : carte -> int
 #renvoie l’attaque d’une carte c
-def get_attaque(c):
-    return 0
+def get_attaque(carte,main):
+    if carte[1] == "Archer" or "Garde" :
+        attaque = 1
+    
+    elif carte[1] == "Soldat":
+        attaque = get_nombre_carte_main(main)
 
+    return attaque
+        
 #get_point_de_defense : carte -> int
 #Renvoie la défense d’une carte c. On prend en compte la position de la carte (offensive ou défensive)
-def get_point_de_defense(c):
-    return 0
 
-#FG : Il manque une fonction getID(carte) qui renvoie l'identifiant de la carte donnée 
-def getID(c):
-	return 0 
+def get_point_de_defense(carte,cdb):
+    if est_en_posture_defensive(carte,cdb)
+        point_defense = carte[3]
+    else:
+        point_defense = carte[4]
+        
+    return point_defense
+
+
+#FG : Il manque une fonction getID(carte) qui renvoie l'identifiant de la carte donnée
+def getID(carte):
+	return carte.ident 
 
 # COMBAT
 #touche: carte x carte -> bool
 #Indique si la carte c2 est à portée de la carte c1
 #Résultat : true si c2 est à portée de c1
-def touche(c1,c2):
-    return 0
+def touche(c1,c2,cdb1,cdb2):
+    
+    positionC1 = get_position(c1,cdb1)
+    positionC2 = get_position(c2,cdb2)
+    
+    if c1.typeCarte == "Archer":
+        if positionC1 == 0:
+            if positionC2 == 3:
+                return True
+            else:
+                return False
+        elif positionC1 == 1:
+            if positionC2 == 3 or positionC2 == 5:
+                return True
+            else:
+                return False
+            
+        elif positionC1 == 2:
+            if positionC2 == 4:
+                return True
+            else:
+                return False
+            
+        elif positionC1 == 3:
+            if positionC2 == 1 or positionC2 == 3:
+                return True
+            else:
+                return False
+            
+        elif positionC1 == 4:
+            if positionC2 == 2 or positionC2 == 0:
+                return True
+            else:
+                return False
+            
+        elif positionC1 == 5:
+            if positionC2 == 1:
+                return True
+            else:
+                return False
+        else:
+            print("Probleme de positions")
+            
+    elif c1.typeCarte == "Soldat" :
+        
+        if positionC1 == 0:
+            if positionC2 == 3:
+                return True
+            else:
+                return False
 
+        elif positionC1 == 1:
+            if positionC2 == 3 or positionC2 == 5:
+                return True
+            else:
+                return False
+
+        elif positionC1 == 2:
+            if positionC2 == 4:
+                return True
+            else:
+                return False
+
+        elif positionC1 == 3:
+            if positionC2 == 1 or positionC2 == 3:
+                return True
+            else:
+                return False
+
+        elif positionC1 == 4:
+            if positionC2 == 2 or positionC2 == 0:
+                return True
+            else:
+                return False
+
+        elif positionC1 == 5:
+            if positionC2 == 1:
+                return True
+            else:
+                return False
+
+        else:
+            print("Probleme de positions")
+        
 #attaquer: carte x carte -> carte
 #La première carte c1 attaque la deuxième carte c2, on soustrait les points de défenses  
 #de la carte 2 par les points d’attaques de la carte 1 les paramètres sont passés en in/out
 #Ne pas oublier de vérifier si la carte attaqué et en position offensive ou défensive
 
 #FG : La modification de aEteTouche n'est pas définie. On passera aEteTouche à True quand la carte a été touchée. 
+
 def attaquer(c1,c2):
-    return 0
+    attaque = get_attaque(c1)
+    pv = get_defense(c2)
+    pvRestant = pv - attaque
+    return pvRestant
 
 #aEteTouche : carte -> bool
 #Indique si la carte a été touché dans le tour
-def aEteTouche(c):
-    return 0
+def aEteTouche(carte):
+    
+    #On récupère la défense de la carte
+    defenseCarte = get_defense(carte)
+    
+    #On récupère la défense originale du dico
+    defenseOriginale =getCarte(carte)
+    
+    if defenseCarte < defenseOriginale:
+        return True
+    else:
+        return False
