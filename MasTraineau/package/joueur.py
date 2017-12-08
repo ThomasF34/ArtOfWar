@@ -11,8 +11,7 @@
 #FG : Structure de donnée choisie 
 # {'ident' : int, 'pioche' : pioche,'main' : main,'royaume' : royaume,'cdb' : cdb,'cimetiere' : cimetiere,'reserve' : reserve}
 def creer_joueur(ident, pioche, main, royaume, cdb, cimetiere, reserve):
-	return {'ident':ident,'pioche':pioche,'main':main,'royaume':royaume,'cdb':cdb,'cimetiere':cimetiere,'reserve':reserve}
-
+	return {'ident':int,'pioche':pioche,'main':main,'royaume':royaume,'cdb':cdb,'cimetiere':cimetiere,'reserve':reserve} 
 
 #Renvoi la pioche du joueur
 #get_pioche : joueur -> pioche
@@ -46,5 +45,8 @@ def get_main(joueur):
     
 #Reinitialiser_carte: joueur -> joueur
 #Remet la défense et le marqueur de touche de toutes les cartes du champ de bataille et du royaume du joueur j à leur état initial.
-def reinitialiser_carte(j):
-    return 0
+
+#Ne pouvant pas accéder à la structure de donnée du royaume et du cdb d'ici et n'ayant pas d'itérateur en place, on a décidé de séparer en deux la fonction reinitialiser carte. 
+def reinitialiser_carte(joueur):
+	reinitialiser_carte_cdb(get_cdb(joueur))
+	reinitialiser_carte_royaume(get_royaume(joueur))

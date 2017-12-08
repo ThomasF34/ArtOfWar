@@ -15,7 +15,7 @@ def placer_dans_main(carte,main):
 # retire la carte c de la main m, in/out
 #CI : on vérifie que cette carte c est bien dans m
 
-#VERIF SI LA CARTE EST DANS LA MAIN (voir dans le main)
+#VERIF SI LA CARTE EST DANS LA MAIN (voir dans le main.py)
 def retirer_de_main(carte,main):
     return main.remove(carte)
 

@@ -34,6 +34,7 @@ def decrire_royaume(roy):
 def retirer_du_royaume(roy,carte):
     roy.remove(carte)
 	return roy
+#VERIF EST CE QUE LA FONCTION EST LANCEE EN VERIFIANT QUE LA CARTE EST BIEN DANS LE ROYAUME 
 
 #est_dans_royaume: carte x roy -> bool
 #renvoie true si il existe une carte de meme type que c dans le royaume #POURQUOI NE PAS DEMANDER LE TYPE DIRECTEMENT ?!
