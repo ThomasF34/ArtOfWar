@@ -15,7 +15,7 @@
 
 
 def creer_carte(ident, typeCarte, posture, defense1, defense2):
-    carte = {ident : ident, typeCarte : typeCarte, posture: posture defenseDef:defense1, defenseOff : defense2}
+    carte = {"ident" : ident, "typeCarte" : typeCarte, "posture" : posture, "defenseDef" : defense1, "defenseOff" : defense2}
     return carte
 
 
@@ -23,50 +23,40 @@ def creer_carte(ident, typeCarte, posture, defense1, defense2):
 #Renvoie le type de la carte
 
 def get_type(carte):
-    return carte[1]
+    return carte["typeCarte"]
 
-#get_position: carte x cdb -> int
-#Renvoie la position (coordonnée) de la carte c sur le champ de bataille cdb
-def get_position(c,cdb):
-    i = 0
-    while i<len(cdb)-1:
-        carteCdb = getCarteCDB(i)
-        if getID(c) == getID(carteCDB)
-            return i
-        i+=1
+
 
 #est_en_posture_defensive: Carte x cdb-> bool
 #vérifie si une carte est en position défensive dans un cdb
 #pré-condition : la carte doit être dans le cdb
 #résultat : True si la carte est en position défensive, false sinon
 def est_en_posture_defensive(carte,cdb):
-    if carte[1] == "def":
-        return True
-    else:
-        return False
-
+    return carte["posture"] == "def"
+         
     
 #mettre_en_offensif: carte -> carte
 #met une carte c en état offensif en in/out
 def mettre_en_offensif(carte):
-    carte.posture = "off"
+    carte["posture"] = "off"
     return carte
 
 #mettre_en_defensive: carte -> carte
 #met une carte c en état défensif in/out
-def mettre_en_defensive(c):
-    carte.posture = "def"
+def mettre_en_defensive(carte):
+    carte["posture"] = "def"
     return carte
 
 #get_attaque : carte -> int
 #renvoie l’attaque d’une carte c
 def get_attaque(carte,main):
-    if carte[1] == "Archer" or "Garde" :
+    if (carte["typeCarte"] == "Archer" or carte["typeCarte"] == "Garde" or carte["typeCarte"] == "Roi1" or carte["typeCarte"] == "Roi2") :
         attaque = 1
     
-    elif carte[1] == "Soldat":
+    else:
+        carte["typeCarte"] == "Soldat":
         attaque = get_nombre_carte_main(main)
-
+        
     return attaque
         
 #get_point_de_defense : carte -> int
@@ -74,16 +64,17 @@ def get_attaque(carte,main):
 
 def get_point_de_defense(carte,cdb):
     if est_en_posture_defensive(carte,cdb)
-        point_defense = carte[3]
+        point_defense = carte["defenseDef"]
     else:
-        point_defense = carte[4]
+        point_defense = carte["defenseOff"]
         
     return point_defense
 
 
 #FG : Il manque une fonction getID(carte) qui renvoie l'identifiant de la carte donnée
+
 def getID(carte):
-	return carte.ident 
+	return carte["ident"] 
 
 # COMBAT
 #touche: carte x carte -> bool
