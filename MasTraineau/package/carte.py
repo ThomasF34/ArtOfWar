@@ -65,6 +65,7 @@ def get_attaque(carte,main):
 #get_point_de_defense : carte -> int
 #Renvoie la défense d’une carte c. On prend en compte la position de la carte (offensive ou défensive)
 
+#POURQUOI CHAMPS BATAILLE CON
 def get_point_de_defense(carte,cdb):
     if est_en_posture_defensive(carte,cdb) :
         point_defense = carte["defenseDef"]
@@ -139,8 +140,7 @@ def touche(c1,c2,cdb1,cdb2):
 
 def attaquer(c1,c2):
     attaque = get_attaque(c1)
-    if est
-    nbDef = get_defense(c2)
+    nbDef = get_point_de_defense(C2)
     nouvelleDefense = nbDef - attaque
     c2["defenseDef"] = nouvelleDefense
 
