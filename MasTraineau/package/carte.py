@@ -31,6 +31,8 @@ def get_type(carte):
 #vérifie si une carte est en position défensive dans un cdb
 #pré-condition : la carte doit être dans le cdb
 #résultat : True si la carte est en position défensive, false sinon
+
+#POURQUOI CHAMPS BATAILLE CON
 def est_en_posture_defensive(carte,cdb):
     return carte["posture"] == "def"
          
@@ -50,7 +52,8 @@ def mettre_en_defensive(carte):
 #get_attaque : carte -> int
 #renvoie l’attaque d’une carte c
 def get_attaque(carte,main):
-    if (carte["typeCarte"] == "Archer" or carte["typeCarte"] == "Garde" or carte["typeCarte"] == "Roi1" or carte["typeCarte"] == "Roi2") :
+    types = ["Archer","Garde","Roi1","Roi2"]
+    if (carte["typeCarte"] in types) :
         attaque = 1
     
     else:
@@ -63,7 +66,7 @@ def get_attaque(carte,main):
 #Renvoie la défense d’une carte c. On prend en compte la position de la carte (offensive ou défensive)
 
 def get_point_de_defense(carte,cdb):
-    if est_en_posture_defensive(carte,cdb)
+    if est_en_posture_defensive(carte,cdb) :
         point_defense = carte["defenseDef"]
     else:
         point_defense = carte["defenseOff"]
@@ -85,84 +88,47 @@ def touche(c1,c2,cdb1,cdb2):
     positionC1 = get_position(c1,cdb1)
     positionC2 = get_position(c2,cdb2)
     
-    if c1.typeCarte == "Archer":
+    if c1["typeCarte"] == "Archer":
         if positionC1 == 0:
-            if positionC2 == 3:
-                return True
-            else:
-                return False
+            return positionC2 == 3
         elif positionC1 == 1:
-            if positionC2 == 3 or positionC2 == 5:
-                return True
-            else:
-                return False
-            
+            return ((positionC2 == 3) or (positionC2 == 5))
         elif positionC1 == 2:
-            if positionC2 == 4:
-                return True
-            else:
-                return False
-            
+            return (positionC2 == 4)
         elif positionC1 == 3:
-            if positionC2 == 1 or positionC2 == 3:
-                return True
-            else:
-                return False
-            
+            return ((positionC2 == 1) or (positionC2 == 3))    
         elif positionC1 == 4:
-            if positionC2 == 2 or positionC2 == 0:
-                return True
-            else:
-                return False
-            
-        elif positionC1 == 5:
-            if positionC2 == 1:
-                return True
-            else:
-                return False
+            return ((positionC2 == 2) or (positionC2 == 0))
         else:
-            print("Probleme de positions")
+            return (positionC2 == 1)
             
-    elif c1.typeCarte == "Soldat" :
-        
+    elif ((c1["typeCarte"] == "Soldat") or (c1["typeCarte"] == "Garde")) :
         if positionC1 == 0:
-            if positionC2 == 3:
-                return True
-            else:
-                return False
-
+            return (positionC2 == 3)
         elif positionC1 == 1:
-            if positionC2 == 3 or positionC2 == 5:
-                return True
-            else:
-                return False
-
+            return ((positionC2 == 3) or (positionC2 == 5))
         elif positionC1 == 2:
-            if positionC2 == 4:
-                return True
-            else:
-                return False
-
-        elif positionC1 == 3:
-            if positionC2 == 1 or positionC2 == 3:
-                return True
-            else:
-                return False
-
+            return (positionC2 == 4)
+        elif (positionC1 == 3)
+            return ((positionC2 == 1) or (positionC2 == 3))
         elif positionC1 == 4:
-            if positionC2 == 2 or positionC2 == 0:
-                return True
-            else:
-                return False
-
-        elif positionC1 == 5:
-            if positionC2 == 1:
-                return True
-            else:
-                return False
-
+            return ((positionC2 == 2) or (positionC2 == 0))
         else:
-            print("Probleme de positions")
+            return (positionC2 == 1)
+
+    else :
+        if positionC1 == 0:
+            return ((positionC2 == 3) or (positionC2 == 5) or (positionC2 == 2))
+        elif positionC1 == 1:
+            return ((positionC2 == 1) or (positionC2 == 4))
+        elif positionC1 == 2:
+            return (positionC2 == 5)
+        elif (positionC1 == 3)
+            return ((positionC2 == 4) or (positionC2 == 0) or (positionC2 == 5) or (positionC2 == 2))
+        elif positionC1 == 4:
+            return ((positionC2 == 4) or (positionC2 == 1) or (positionC2 == 5) or (positionC2 == 3))
+        else:
+            return ((positionC2 == 3) or (positionC2 == 0) or (positionC2 == 4) or (positionC2 == 2))
         
 #attaquer: carte x carte -> carte
 #La première carte c1 attaque la deuxième carte c2, on soustrait les points de défenses  
@@ -173,9 +139,10 @@ def touche(c1,c2,cdb1,cdb2):
 
 def attaquer(c1,c2):
     attaque = get_attaque(c1)
-    pv = get_defense(c2)
-    pvRestant = pv - attaque
-    return pvRestant
+    if est
+    nbDef = get_defense(c2)
+    nouvelleDefense = nbDef - attaque
+    c2["defenseDef"] = nouvelleDefense
 
 #aEteTouche : carte -> bool
 #Indique si la carte a été touché dans le tour
