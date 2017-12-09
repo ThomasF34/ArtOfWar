@@ -1,5 +1,5 @@
 ##ROYAUME
-
+from package.carte import *
 #Le royaume est vide quand on le crée, on le remplit dans le main du programme
 
 #Crée un royaume vide, in/out
@@ -7,23 +7,23 @@
 #FG / Structure de donnée 
 # (Carte)[] puis on append à chaque ajout (c'est donc une liste)
 def creer_royaume():
-    return []
+	return []
 
 #placer_dans_royaume : carte x royaume -> royaume
 #Place une carte c dans le royaume r, in/out
 def placer_dans_royaume(carte, roy): 
-    roy.append(carte)
-    return roy
+	roy.append(carte)
+	return roy
 
 #get_nombre_carte_royaume: royaume -> int
 #Renvoie le nombre de carte d’un royaume roy 
 def get_nombre_carte_royaume(roy):
-    return len(roy)
+	return len(roy)
 
 #Afficher_Royaume: royaume -> string
 #Décrit le royaume passer en paramètre sous forme de chaine de caractère, e.g : "5 Soldats, 2 Gardes, 3 Archers"
 def decrire_royaume(roy):
-    res = "Voici votre royaume : \n"
+	res = "Voici votre royaume : \n"
 	for c in roy[:-1] : 
 		res += str(getID(c)) + " " + get_type(c)+", "
 	res += str(getID(roy[-1])) + " " + get_type(roy[-1])
@@ -32,9 +32,9 @@ def decrire_royaume(roy):
 #Retirer_carte_royaume: royaume x carte -> royaume
 #Retire une carte c du royaume r, en in/out
 def retirer_du_royaume(roy,carte):
-    roy.remove(carte)
+	roy.remove(carte)
 	return roy
-#VERIF EST CE QUE LA FONCTION EST LANCEE EN VERIFIANT QUE LA CARTE EST BIEN DANS LE ROYAUME 
+	#VERIF EST CE QUE LA FONCTION EST LANCEE EN VERIFIANT QUE LA CARTE EST BIEN DANS LE ROYAUME 
 
 #est_dans_royaume: carte x roy -> bool
 #renvoie true si il existe une carte de meme type que c dans le royaume #POURQUOI NE PAS DEMANDER LE TYPE DIRECTEMENT ?!
@@ -42,16 +42,19 @@ def est_dans_royaume(carte,roy):
 	while i < len(roy)-1 : 
 		if get_type(roy[i]) == get_type(carte) :
 			return True
-		i++
+		i += 1
 	return False
 
 
-#Reinitialiser_carte: joueur -> joueur
-#Remet la défense et le marqueur de touche de toutes les cartes du champ de bataille et du royaume du joueur j à leur état initial.
-def reinitialiser_carte_royaume(get_royaume(joueur)):
-	return 0 
+#Reinitialiser_carte_royaume: royaume -> royaume
+#Réinitialise les cartes du royaume.
+def reinitialiser_carte_royaume(royaume):
+	for carte in royaume : 
+		reinitialiser_carte(carte)
+	return royaume
 
 
-		
-	
-    
+
+
+
+

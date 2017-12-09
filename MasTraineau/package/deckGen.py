@@ -1,4 +1,6 @@
 #deckGen 
+from package.carte import *
+
 #Ce type va comprendre toutes les cartes du jeu. Cela permettra de retrouver facilement les cartes choisies par l'utilisateur lorsqu'il nous donne un int (identifiant de la carte)
 
 #Structure : Dico de cartes

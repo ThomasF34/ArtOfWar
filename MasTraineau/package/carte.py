@@ -1,5 +1,5 @@
 ###carte
-# Carte(ident: Int, TypeCarte: Str, posture : Str, position : Int, Attaque : Int, Defense : Int)
+# Carte(ident: Int, TypeCarte: Str, posture : Str)
 #creer_carte: int x string x string -> carte
 #Crée une carte. 
 #pré-condition :    
@@ -11,21 +11,17 @@
 
 
 
-# Carte(ident:Int, TypeCarte:Str, posture:Str,  Attaque:Int, Defense:[Int](2) )
+# Carte("ident" : ident, "typeCarte" : String, "posture" : String, "defenseDef" :int, "defenseOff" : int, 'touché':Bool)
 
 
-def creer_carte(ident, typeCarte, posture, defense1, defense2):
-    carte = {"ident" : ident, "typeCarte" : typeCarte, "posture" : posture, "defenseDef" : defense1, "defenseOff" : defense2}
+def creer_carte(ident, typeCarte, posture):
+    carte = {"ident" : ident, "typeCarte" : typeCarte, "posture" : posture, "defenseDef" : obtenirDefenseDef(typeCarte), "defenseOff" : obtenirDefenseOff(typeCarte), 'touché':False}
     return carte
-
 
 #get_type: carte -> string
 #Renvoie le type de la carte
-
 def get_type(carte):
     return carte["typeCarte"]
-
-
 
 #est_en_posture_defensive: Carte x cdb-> bool
 #vérifie si une carte est en position défensive dans un cdb
@@ -36,7 +32,6 @@ def get_type(carte):
 def est_en_posture_defensive(carte,cdb):
     return carte["posture"] == "def"
          
-    
 #mettre_en_offensif: carte -> carte
 #met une carte c en état offensif en in/out
 def mettre_en_offensif(carte):
@@ -55,9 +50,7 @@ def get_attaque(carte,main):
     types = ["Archer","Garde","Roi1","Roi2"]
     if (carte["typeCarte"] in types) :
         attaque = 1
-    
-    else:
-        carte["typeCarte"] == "Soldat":
+    else: #carte["typeCarte"] == "Soldat"
         attaque = get_nombre_carte_main(main)
         
     return attaque
@@ -69,14 +62,13 @@ def get_attaque(carte,main):
 def get_point_de_defense(carte,cdb):
     if est_en_posture_defensive(carte,cdb) :
         point_defense = carte["defenseDef"]
-    else:
+    else :
         point_defense = carte["defenseOff"]
         
     return point_defense
 
 
 #FG : Il manque une fonction getID(carte) qui renvoie l'identifiant de la carte donnée
-
 def getID(carte):
 	return carte["ident"] 
 
@@ -110,7 +102,7 @@ def touche(c1,c2,cdb1,cdb2):
             return ((positionC2 == 3) or (positionC2 == 5))
         elif positionC1 == 2:
             return (positionC2 == 4)
-        elif (positionC1 == 3)
+        elif (positionC1 == 3):
             return ((positionC2 == 1) or (positionC2 == 3))
         elif positionC1 == 4:
             return ((positionC2 == 2) or (positionC2 == 0))
@@ -124,7 +116,7 @@ def touche(c1,c2,cdb1,cdb2):
             return ((positionC2 == 1) or (positionC2 == 4))
         elif positionC1 == 2:
             return (positionC2 == 5)
-        elif (positionC1 == 3)
+        elif (positionC1 == 3):
             return ((positionC2 == 4) or (positionC2 == 0) or (positionC2 == 5) or (positionC2 == 2))
         elif positionC1 == 4:
             return ((positionC2 == 4) or (positionC2 == 1) or (positionC2 == 5) or (positionC2 == 3))
@@ -150,14 +142,34 @@ def attaquer(c1,c2,cdb1,cdb2):
 #aEteTouche : carte -> bool
 #Indique si la carte a été touché dans le tour
 def aEteTouche(carte):
-    
-    #On récupère la défense de la carte
-    defenseCarte = get_defense(carte)
-    
-    #On récupère la défense originale du dico
-    defenseOriginale =getCarte(carte)
-    
-    if defenseCarte < defenseOriginale:
-        return True
-    else:
-        return False
+	return carte['touché']
+	
+	
+def reinitialiser_carte(carte) : 
+	carte['touché'] = False
+	carte['posture'] = 'def'
+	carte['defenseDef'] = obtenirDefenseDef(carte['typeCarte'])
+	carte['defenseOff'] = obtenirDefenseOff(carte['typeCarte'])
+	return carte
+
+
+def obtenirDefenseDef(typeCarte) :
+	if typeCarte == "Soldat" or typeCarte == "Archer" : 
+		return 2 
+	elif typeCarte == "Garde" : 
+		return 3 
+	elif typeCarte == "Roi1" :
+		return 4 
+	else : #Roi2
+		return 5 
+	
+def obtenirDefenseOff(typeCarte) :
+	if typeCarte == "Roi1" or typeCarte == "Roi2" : 
+		return 4
+	elif typeCarte == "Soldat" or typeCarte == "Archer" : 
+		return 1
+	else : #Garde
+		return 2
+	
+	
+	

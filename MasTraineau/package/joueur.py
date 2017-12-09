@@ -1,3 +1,8 @@
+from package.cdb import *
+from package.royaume import *
+
+
+
 #Crée un joueur.
 #ident : identifiant du joueur, compris entre 1 et 2
 #pioche : pioche du joueur
@@ -26,7 +31,7 @@ def get_cdb(joueur):
 #Renvoie la réserve d’un joueur
 #get_reserve : joueur -> reserve
 def get_reserve(joueur):
-    return joueur['reserve']
+	return joueur['reserve']
 
 #Renvoie le royaume d’un joueur
 #get_royaume : joueur -> royaume
@@ -47,6 +52,7 @@ def get_main(joueur):
 #Remet la défense et le marqueur de touche de toutes les cartes du champ de bataille et du royaume du joueur j à leur état initial.
 
 #Ne pouvant pas accéder à la structure de donnée du royaume et du cdb d'ici et n'ayant pas d'itérateur en place, on a décidé de séparer en deux la fonction reinitialiser carte. 
-def reinitialiser_carte(joueur):
+def reinitialiser_carteJoueur(joueur):
 	reinitialiser_carte_cdb(get_cdb(joueur))
 	reinitialiser_carte_royaume(get_royaume(joueur))
+	return joueur

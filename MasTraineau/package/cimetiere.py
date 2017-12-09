@@ -7,11 +7,11 @@
 # (Carte)[0] puis on append à chaque ajout (c'est donc une liste)
 
 def creer_cimetiere():
-    return []
+	return []
 
 #placer_dans_cimetiere: carte x cimetiere -> cimetiere
 #Place la carte c dans le cimetière cim, en in/out
 #renvoie le cimetière
 def placer_dans_cimetiere(carte,cim):
-    cim.append(carte)
+	cim.append(carte)
 	return cim 
