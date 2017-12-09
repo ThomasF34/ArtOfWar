@@ -43,7 +43,15 @@ def est_dans_royaume(carte,roy):
 		if get_type(roy[i]) == get_type(carte) :
 			return True
 		i++
-	return False 
+	return False
+
+
+#Reinitialiser_carte: joueur -> joueur
+#Remet la défense et le marqueur de touche de toutes les cartes du champ de bataille et du royaume du joueur j à leur état initial.
+def reinitialiser_carte_royaume(get_royaume(joueur)):
+	return 0 
+
+
 		
 	
     

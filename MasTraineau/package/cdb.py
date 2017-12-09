@@ -29,8 +29,6 @@ def placer_dans_cdb(carte, cdb, pos):
 def est_dans_cdb(carte,cdb):
     return carte in cdb 
 
-
-
 #position_vide : int x cdb -> bool
 #Indique si une position du champ de bataille est vide
 #position : entier représentant l'indice de position
@@ -88,12 +86,25 @@ def est_position_utilisable(cdb,p):
 #                                            4. Archer, 5. Vide, 6. Archer"
 #cdb : champ de bataille à décrire
 def decrire_cdb(cdb):
-    return 0
+	res = ""
+    for i in range(3) :
+		carte = getCarteCDB(i,cdb)
+		res +=  str(i)+". "str(getID(carte))+" "+ get_type(carte)+", "
+	res += "\n"
+	for i in range(3) : 
+		carte = getCarteCDB(i,cdb)
+		res +=  str(i+3)+". "str(getID(carte))+" "+ get_type(carte)+", "
+	return res
+		
 
 #Mettre_en_position_def: cdb -> cdb
 #Met toutes les cartes d’un champ de bataille cdb en position defensive, in/out
 def mettre_en_position_def(cdb):
-    return 0
+    for pos in range(6) : 
+		carte = getCarteCDB(pos,cdb)
+		if carte != "Vide" :
+			mettre_en_deffensive(carte)
+	return cdb
     
 #get_nombre_carte_cdb: cdb -> int
 #Renvoie le nombre de carte qu’il y a sur le champ de bataille cdb
@@ -103,15 +114,33 @@ def get_nombre_carte_cdb(cdb):
 #reste_carte_en_position_defensive: cdb -> bool:
 #Renvoie True si il reste au moins une carte en position défensive
 def reste_carte_en_position_defensive(cdb):
-    return 0
+    pos = 0 
+	while pos < 6 : 
+		carte = getCarteCDB(pos,cdb)
+		if est_en_position_defensive(carte,cdb) :
+			return True
+		pos++
+	return False
 
 #possibilité_attaquer: cdb x cdb -> bool
 #renvoie true si le champ de bataille cdb1 a des cartes pouvant attaquer une des 
 #cartes du cdb2
 def possibilite_attaquer(cdb1,cdb2):
-    return 0
+	pos1 = 0 
+	while pos1 < 6 : 
+		pos2 = 0 
+		carte = getCarteCDB(pos1,cdb1) 
+		if carte != "Vide" :
+			while pos2 < 6 :
+				carte2 = getCarteCDB(pos2,cdb2)
+				if carte2 != "Vide" : 
+					if touche(carte1,carte2,cdb1,cdb2) : 
+						return True	
+				pos2++
+		pos1++
+	return False
 
-#avancer_unite: int x cdb -> cdb
+f#avancer_unite: int x cdb -> cdb
 #Avance la carte sur le front, modifie en in/out le champ de bataille
 #Le front ne doit pas être occupé par une autre carte ##LA VERIFICATION EST FAITES ?##  
 #p : position de la carte à avancer 
@@ -124,3 +153,27 @@ def avancer_unite(pos, cdb):
 # int x cdb -> carte
 def getCarteCDB(pos,cdb) : 
 	return cdb[pos] 
+
+#get_position: carte x cdb -> int
+#Renvoie la position (coordonnée) de la carte c sur le champ de bataille cdb
+def get_position(c,cdb):
+    i = 0
+    while i<=len(cdb)-1:
+    	carteCdb = getCarteCDB(i)
+		if getID(c) == getID(carteCdb,cdb):
+			return i
+		i+=1
+    return -1
+
+
+#Reinitialiser_carte: joueur -> joueur
+#Remet la défense et le marqueur de touche de toutes les cartes du champ de bataille et du royaume du joueur j à leur état initial.
+
+def reinitialiser_carte_cdb(cdb) : 
+	remettreDefenseInitial()
+	remettreAEteToucheFalse()
+	
+	
+	
+
+
