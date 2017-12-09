@@ -138,12 +138,15 @@ def touche(c1,c2,cdb1,cdb2):
 
 #FG : La modification de aEteTouche n'est pas définie. On passera aEteTouche à True quand la carte a été touchée. 
 
-def attaquer(c1,c2):
+def attaquer(c1,c2,cdb1,cdb2):
     attaque = get_attaque(c1)
-    nbDef = get_point_de_defense(C2)
+    nbDef = get_point_de_defense(c2,cdb2)
     nouvelleDefense = nbDef - attaque
-    c2["defenseDef"] = nouvelleDefense
-
+    if est_en_posture_defensive(carte2,cdb2):
+        c2["defenseDef"] = nouvelleDefense
+    else : 
+        c2["defenseOff"] = nouvelleDefense
+        
 #aEteTouche : carte -> bool
 #Indique si la carte a été touché dans le tour
 def aEteTouche(carte):
