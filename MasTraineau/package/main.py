@@ -2,7 +2,7 @@
 from package.carte import *
 
 #Crée une main vide
-#FG / Structure de donnée 
+#FG / Structure de donnée
 # (Carte)[0] puis on append à chaque ajout (c'est donc une liste)
 def creer_main():
 	return []
@@ -32,12 +32,13 @@ def  get_nombre_carte_main(main):
 
 #affiche_main : main -> string
 #Décrit une main, par ex : "Roi, Garde, Garde, Soldat, Archer, Archer"
-#FG : On change la description en y intégrant l'Ident de la carte. On a alors px "1 Garde, 12 Garde, 30 Soldat, 28 Archer, 24 Archer" 
+#FG : On change la description en y intégrant l'Ident de la carte. On a alors px "1 Garde, 12 Garde, 30 Soldat, 28 Archer, 24 Archer"
 def decrire_main(main):
 	res = "Voici votre main : \n"
-	for c in main[:-1] : 
+	for c in main[:-1] :
 		res += str(getID(c)) + " " + get_type(c)+", "
 	res += str(getID(main[-1])) + " " + get_type(main[-1])
+	res += "\n\n"
 	return res
 
 #est_dans_main: carte x main -> bool
